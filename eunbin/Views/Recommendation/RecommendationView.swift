@@ -15,6 +15,7 @@ struct RecommendationView: View {
     @Query private var feedbacks: [FeedbackRecord]
     @State private var viewModel = RecommendationViewModel()
     @State private var selectedFood: FoodItem?
+    @State private var showManualLogging = false
 
     private var profile: UserProfile? { profiles.first }
 
@@ -38,6 +39,16 @@ struct RecommendationView: View {
                         }
                         .padding(.horizontal)
                     }
+
+                    // Manual Logging Button
+                    Button {
+                        showManualLogging = true
+                    } label: {
+                        Label("직접 입력하기", systemImage: "square.and.pencil")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.orange)
+                    }
+                    .padding(.top, 8)
                 }
                 .padding(.top)
             }
@@ -61,6 +72,12 @@ struct RecommendationView: View {
             .sheet(item: $selectedFood) { food in
                 MealLoggingView(food: food) {
                     selectedFood = nil
+                    viewModel.refresh(profile: profile, logs: logs, feedbacks: feedbacks)
+                }
+            }
+            .sheet(isPresented: $showManualLogging) {
+                MealLoggingView {
+                    showManualLogging = false
                     viewModel.refresh(profile: profile, logs: logs, feedbacks: feedbacks)
                 }
             }
@@ -146,14 +163,3 @@ struct FoodCard: View {
     }
 }
 
-// MARK: - Placeholder MealLoggingView
-
-struct MealLoggingView: View {
-    let food: FoodItem
-    let onComplete: () -> Void
-
-    var body: some View {
-        Text("식사 로깅 (다음 단계에서 구현)")
-            .onTapGesture { onComplete() }
-    }
-}
