@@ -70,10 +70,12 @@ struct RecommendationView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarLeading) {
-                    NavigationLink {
-                        Text("설정 (준비 중)")
-                    } label: {
-                        Image(systemName: "gearshape")
+                    if let profile {
+                        NavigationLink {
+                            SettingsView(profile: profile)
+                        } label: {
+                            Image(systemName: "gearshape")
+                        }
                     }
                 }
             }
