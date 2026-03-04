@@ -92,6 +92,7 @@ struct RecommendationView: View {
                 }
             }
             .onAppear {
+                viewModel.configure(modelContext: modelContext)
                 viewModel.loadRecommendations(profile: profile, logs: logs, feedbacks: feedbacks)
             }
         }

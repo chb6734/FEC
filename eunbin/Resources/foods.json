@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "bibimbap",
+    "name": "비빔밥",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "야채", "고추장"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "kimchi_jjigae",
+    "name": "김치찌개",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["찌개", "김치", "돼지고기"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "doenjang_jjigae",
+    "name": "된장찌개",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["찌개", "된장", "두부"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "bulgogi",
+    "name": "불고기",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "소고기"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "galbi",
+    "name": "갈비",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "소고기", "특별"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "japchae",
+    "name": "잡채",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "야채"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "kongnamul_gukbap",
+    "name": "콩나물국밥",
+    "category": "korean",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["국밥", "해장"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "samgyetang",
+    "name": "삼계탕",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["탕", "닭", "보양"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "jeyuk_bokkeum",
+    "name": "제육볶음",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["볶음", "돼지고기", "매운"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "sundae_gukbap",
+    "name": "순대국밥",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["국밥", "순대"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "kimchi_bokkeumbap",
+    "name": "김치볶음밥",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "볶음", "김치"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "haemul_pajeon",
+    "name": "해물파전",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["전", "해물"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "dakgalbi",
+    "name": "닭갈비",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "매운", "볶음"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "gimbap",
+    "name": "김밥",
+    "category": "korean",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["밥", "간편"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "tteokguk",
+    "name": "떡국",
+    "category": "korean",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["국", "떡"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "bibim_naengmyeon",
+    "name": "비빔냉면",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "매운", "차가운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "korean_salad",
+    "name": "두부 샐러드",
+    "category": "korean",
+    "mealTypes": ["breakfast", "lunch", "dinner"],
+    "restrictions": ["vegetarian", "lowCalorie"],
+    "tags": ["두부", "야채", "가벼운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "mul_naengmyeon",
+    "name": "물냉면",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "차가운", "국물"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "galbitang",
+    "name": "갈비탕",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["탕", "소고기", "국물"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "seolleongtang",
+    "name": "설렁탕",
+    "category": "korean",
+    "mealTypes": ["breakfast", "lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["탕", "소고기", "국물"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "gamjatang",
+    "name": "감자탕",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["탕", "돼지고기", "감자"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "budae_jjigae",
+    "name": "부대찌개",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["찌개", "라면", "소시지"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "sundubu_jjigae",
+    "name": "순두부찌개",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["찌개", "두부", "매운"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "samgyeopsal",
+    "name": "삼겹살",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "돼지고기", "구이"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "bossam",
+    "name": "보쌈",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["돼지고기", "쌈"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "jokbal",
+    "name": "족발",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["돼지고기", "야식"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "dakbokkeum_tang",
+    "name": "닭볶음탕",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "매운", "탕"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "gopchang",
+    "name": "곱창",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["내장", "구이", "야식"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "haejang_guk",
+    "name": "해장국",
+    "category": "korean",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["국", "해장", "국물"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "dwaeji_gukbap",
+    "name": "돼지국밥",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["국밥", "돼지고기"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "sogogi_deopbap",
+    "name": "소고기덮밥",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "소고기", "덮밥", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "nakji_bokkeum",
+    "name": "낙지볶음",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["해물", "매운", "볶음"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "kalguksu",
+    "name": "칼국수",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "국물"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "sujebi",
+    "name": "수제비",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "국물"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "chicken",
+    "name": "치킨",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "튀김", "야식"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "yangnyeom_chicken",
+    "name": "양념치킨",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "매운", "달콤", "야식"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "dakgangjeong",
+    "name": "닭강정",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "달콤", "튀김"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "jjim_dak",
+    "name": "찜닭",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "간장", "찜"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "yukhoe",
+    "name": "육회",
+    "category": "korean",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["소고기", "날것", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "yukgaejang",
+    "name": "육개장",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["탕", "매운", "소고기"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "ojingeo_bokkeum",
+    "name": "오징어볶음",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["해물", "매운", "볶음"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "dak_galbi_deopbap",
+    "name": "닭갈비덮밥",
+    "category": "korean",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["밥", "닭", "덮밥", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "cupbap",
+    "name": "컵밥",
+    "category": "korean",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["밥", "간편", "트렌드", "혼밥"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "nurungji",
+    "name": "누룽지탕",
+    "category": "korean",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["glutenFree"],
+    "tags": ["밥", "국물", "가벼운"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "hwedeopbap",
+    "name": "회덮밥",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "생선", "덮밥"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "kongbap",
+    "name": "콩밥 정식",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["vegetarian"],
+    "tags": ["밥", "건강", "가벼운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "salmon_deopbap",
+    "name": "연어덮밥",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "연어", "덮밥", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "makguksu",
+    "name": "막국수",
+    "category": "korean",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["면", "차가운", "메밀"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "jeonbokjuk",
+    "name": "전복죽",
+    "category": "korean",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["glutenFree"],
+    "tags": ["죽", "해물", "보양"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "tteok_galbi",
+    "name": "떡갈비",
+    "category": "korean",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "소고기", "구이"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "jajangmyeon",
+    "name": "자장면",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "짜장"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "jjamppong",
+    "name": "짬뽕",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "해물", "매운"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "tangsuyuk",
+    "name": "탕수육",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "돼지고기", "튀김"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "mapo_tofu",
+    "name": "마파두부",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["두부", "매운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "fried_rice",
+    "name": "볶음밥",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "볶음"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "kanpunggi",
+    "name": "깐풍기",
+    "category": "chinese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "튀김", "매운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "jjamppong_bap",
+    "name": "짬뽕밥",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "해물", "매운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "gun_mandu",
+    "name": "군만두",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["만두", "간식"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "malatang",
+    "name": "마라탕",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["탕", "매운", "트렌드", "마라"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "mala_xiangguo",
+    "name": "마라샹궈",
+    "category": "chinese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["볶음", "매운", "트렌드", "마라"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "yangkkouchi",
+    "name": "양꼬치",
+    "category": "chinese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "양고기", "구이", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "xiaolongbao",
+    "name": "샤오롱바오",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["만두", "딤섬"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "dimsum",
+    "name": "딤섬",
+    "category": "chinese",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["만두", "딤섬", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "yukgaejang_cn",
+    "name": "우육면",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "소고기", "국물"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "jjajang_deopbap",
+    "name": "짜장덮밥",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "짜장", "덮밥"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "yuringi",
+    "name": "유린기",
+    "category": "chinese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "튀김"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "gganpung_saeu",
+    "name": "깐풍새우",
+    "category": "chinese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["새우", "튀김", "매운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "jjajang_bap",
+    "name": "자장밥",
+    "category": "chinese",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["밥", "짜장"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "mala_kkochi",
+    "name": "마라꼬치",
+    "category": "chinese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["꼬치", "매운", "트렌드", "마라"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "baikut_teh",
+    "name": "바쿠테",
+    "category": "chinese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["탕", "돼지고기", "한약"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "sushi",
+    "name": "초밥",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "생선"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "ramen",
+    "name": "라멘",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "국물"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "donkatsu",
+    "name": "돈카츠",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "돼지고기", "튀김"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "udon",
+    "name": "우동",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "국물"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "curry_rice",
+    "name": "카레라이스",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "카레"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "takoyaki",
+    "name": "타코야키",
+    "category": "japanese",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["간식", "문어"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "onigiri",
+    "name": "오니기리",
+    "category": "japanese",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["밥", "간편"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "soba",
+    "name": "소바",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "차가운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "katsu_curry",
+    "name": "카츠카레",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["카레", "튀김", "돈카츠"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "gyudon",
+    "name": "규동",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "소고기", "덮밥"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "katsudon",
+    "name": "카츠동",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "돈카츠", "덮밥"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "oyakodon",
+    "name": "오야코동",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "닭", "달걀", "덮밥"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "salmon_sashimi",
+    "name": "연어회",
+    "category": "japanese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["연어", "날것", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "chirashi",
+    "name": "치라시",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "생선", "덮밥", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "okonomiyaki",
+    "name": "오코노미야키",
+    "category": "japanese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["전", "야채"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "karaage",
+    "name": "가라아게",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "튀김"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "omakase",
+    "name": "오마카세",
+    "category": "japanese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["생선", "특별", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "teppanyaki",
+    "name": "철판구이",
+    "category": "japanese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "구이", "특별"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "tonkotsu_ramen",
+    "name": "돈코츠 라멘",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "국물", "돼지고기"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "yakitori",
+    "name": "야키토리",
+    "category": "japanese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["닭", "꼬치", "구이"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "edamame_set",
+    "name": "에다마메 세트",
+    "category": "japanese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["vegetarian", "glutenFree"],
+    "tags": ["콩", "가벼운", "안주"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "nabe",
+    "name": "나베(전골)",
+    "category": "japanese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["전골", "국물", "야채"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "tuna_don",
+    "name": "참치동",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "참치", "덮밥"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "unagi_don",
+    "name": "장어동",
+    "category": "japanese",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "장어", "보양", "특별"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "tempura",
+    "name": "튀김우동(텐동)",
+    "category": "japanese",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["튀김", "밥", "덮밥"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "pasta",
+    "name": "파스타",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "이탈리안"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "pizza",
+    "name": "피자",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["빵", "치즈"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "hamburger",
+    "name": "햄버거",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["빵", "고기", "간편"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "steak",
+    "name": "스테이크",
+    "category": "western",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["고기", "소고기", "특별"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "salad",
+    "name": "샐러드",
+    "category": "western",
+    "mealTypes": ["breakfast", "lunch", "dinner"],
+    "restrictions": ["vegetarian", "glutenFree", "lowCalorie"],
+    "tags": ["야채", "가벼운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "sandwich",
+    "name": "샌드위치",
+    "category": "western",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["빵", "간편"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "risotto",
+    "name": "리조또",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "치즈", "이탈리안"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "omelette",
+    "name": "오믈렛",
+    "category": "western",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["glutenFree"],
+    "tags": ["달걀", "아침"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "fish_and_chips",
+    "name": "피쉬앤칩스",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["생선", "튀김"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "gratin",
+    "name": "그라탱",
+    "category": "western",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["치즈", "오븐"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "cream_pasta",
+    "name": "크림파스타",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "크림", "이탈리안"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "carbonara",
+    "name": "까르보나라",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "크림", "베이컨"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "aglio_olio",
+    "name": "알리오올리오",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "마늘", "이탈리안"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "gnocchi",
+    "name": "뇨키",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["vegetarian"],
+    "tags": ["감자", "이탈리안"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "brunch_plate",
+    "name": "브런치 플레이트",
+    "category": "western",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["달걀", "빵", "트렌드", "브런치"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "eggs_benedict",
+    "name": "에그 베네딕트",
+    "category": "western",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["none"],
+    "tags": ["달걀", "브런치", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "avocado_toast",
+    "name": "아보카도 토스트",
+    "category": "western",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["vegetarian"],
+    "tags": ["빵", "아보카도", "트렌드", "건강"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "chicken_salad",
+    "name": "치킨 샐러드",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["닭", "야채", "건강"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "club_sandwich",
+    "name": "클럽 샌드위치",
+    "category": "western",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["빵", "닭", "간편"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "french_toast",
+    "name": "프렌치토스트",
+    "category": "western",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian"],
+    "tags": ["빵", "달콤", "브런치"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "croissant",
+    "name": "크로와상",
+    "category": "western",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian"],
+    "tags": ["빵", "간편", "아침"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "bagel",
+    "name": "베이글",
+    "category": "western",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["vegetarian"],
+    "tags": ["빵", "간편", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "smash_burger",
+    "name": "스매시 버거",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["빵", "고기", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "truffle_pasta",
+    "name": "트러플 파스타",
+    "category": "western",
+    "mealTypes": ["dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "트러플", "특별", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "lobster_roll",
+    "name": "랍스터 롤",
+    "category": "western",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["빵", "해물", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "poke_bowl_w",
+    "name": "포케 보울",
+    "category": "western",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["밥", "연어", "건강", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "acai_bowl",
+    "name": "아사이볼",
+    "category": "western",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["vegetarian", "glutenFree"],
+    "tags": ["과일", "건강", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "grain_bowl",
+    "name": "그레인 보울",
+    "category": "western",
+    "mealTypes": ["lunch"],
+    "restrictions": ["vegetarian", "lowCalorie"],
+    "tags": ["곡물", "건강", "트렌드", "혼밥"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "wrap",
+    "name": "랩(또띠아)",
+    "category": "western",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["간편", "건강"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "quiche",
+    "name": "키쉬",
+    "category": "western",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["vegetarian"],
+    "tags": ["달걀", "파이", "브런치"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "tteokbokki",
+    "name": "떡볶이",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["떡", "매운"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "ramyeon",
+    "name": "라면",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "매운", "간편"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "twigim",
+    "name": "튀김",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["튀김", "간식"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "odeng",
+    "name": "어묵",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["어묵", "국물"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "sundae",
+    "name": "순대",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["순대", "간식"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "hotdog",
+    "name": "핫도그",
+    "category": "snack",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["빵", "간편"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "mandu",
+    "name": "만두",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["만두", "간식"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "toast",
+    "name": "토스트",
+    "category": "snack",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["빵", "간편", "아침"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "cheese_tteokbokki",
+    "name": "치즈떡볶이",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["떡", "치즈", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "rose_tteokbokki",
+    "name": "로제떡볶이",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["떡", "크림", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "corndog",
+    "name": "핫도그(콘도그)",
+    "category": "snack",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["간식", "치즈", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "bungeoppang",
+    "name": "붕어빵",
+    "category": "snack",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["vegetarian"],
+    "tags": ["간식", "팥", "겨울"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "gyeranppang",
+    "name": "계란빵",
+    "category": "snack",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["none"],
+    "tags": ["달걀", "빵", "간편"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "sundae_bokkeum",
+    "name": "순대볶음",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["순대", "매운", "볶음"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "dak_kkochi",
+    "name": "닭꼬치",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["닭", "꼬치", "간식"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "sotteok",
+    "name": "소떡소떡",
+    "category": "snack",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["소시지", "떡", "간식"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "cupbap_dosirak",
+    "name": "컵밥 도시락",
+    "category": "snack",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["밥", "간편", "혼밥", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "rabokki",
+    "name": "라볶이",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "떡", "매운"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "gireum_tteokbokki",
+    "name": "기름떡볶이",
+    "category": "snack",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["떡", "간장"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "egg_toast",
+    "name": "길거리 토스트",
+    "category": "snack",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["빵", "달걀", "간편"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "porridge",
+    "name": "죽",
+    "category": "other",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["죽", "가벼운", "아침"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "cereal",
+    "name": "시리얼",
+    "category": "other",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian"],
+    "tags": ["간편", "아침"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "yogurt_granola",
+    "name": "요거트 그래놀라",
+    "category": "other",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian"],
+    "tags": ["간편", "아침", "가벼운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "pho",
+    "name": "쌀국수",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["면", "국물", "베트남"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "pad_thai",
+    "name": "팟타이",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["면", "볶음", "태국"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "burrito",
+    "name": "부리또",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["멕시칸", "간편"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "bibim_guksu",
+    "name": "비빔국수",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["면", "매운", "차가운"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "bun_cha",
+    "name": "분짜",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["면", "베트남", "고기"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "banh_mi",
+    "name": "반미",
+    "category": "other",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["빵", "베트남", "간편", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "tom_yum",
+    "name": "똠양꿍",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["탕", "태국", "매운", "새우"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "green_curry",
+    "name": "그린커리",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["카레", "태국", "코코넛"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "nasi_goreng",
+    "name": "나시고렝",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "볶음", "인도네시아"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "gapao_rice",
+    "name": "가파오라이스",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "태국", "매운", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "laksa",
+    "name": "락사",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "국물", "코코넛", "싱가포르"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "taco",
+    "name": "타코",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["멕시칸", "트렌드", "간편"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "nachos",
+    "name": "나초",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["멕시칸", "간식", "치즈"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "quesadilla",
+    "name": "퀘사디아",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["멕시칸", "치즈", "간편"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "butter_chicken",
+    "name": "버터치킨 커리",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["카레", "인도", "닭"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "naan_curry",
+    "name": "난+커리",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["빵", "카레", "인도"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "tikka_masala",
+    "name": "티카 마살라",
+    "category": "other",
+    "mealTypes": ["dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["카레", "인도", "닭"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "poke_bowl",
+    "name": "포케 보울",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["밥", "연어", "건강", "트렌드", "혼밥"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "salmon_bowl",
+    "name": "연어 보울",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["밥", "연어", "건강", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "chicken_breast_salad",
+    "name": "닭가슴살 샐러드",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["닭", "야채", "건강", "다이어트"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "protein_bowl",
+    "name": "프로틴 보울",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["건강", "단백질", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "boiled_egg_set",
+    "name": "삶은 달걀 + 고구마",
+    "category": "other",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["vegetarian", "glutenFree", "lowCalorie"],
+    "tags": ["건강", "간편", "다이어트"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "sweet_potato",
+    "name": "고구마",
+    "category": "other",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["vegetarian", "glutenFree", "lowCalorie"],
+    "tags": ["간편", "건강", "가벼운"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "smoothie_bowl",
+    "name": "스무디 보울",
+    "category": "other",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian", "glutenFree"],
+    "tags": ["과일", "건강", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "overnight_oats",
+    "name": "오버나이트 오트",
+    "category": "other",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian"],
+    "tags": ["오트", "건강", "트렌드", "간편"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "greek_yogurt_bowl",
+    "name": "그릭요거트 보울",
+    "category": "other",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian", "glutenFree"],
+    "tags": ["요거트", "건강", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "energy_bowl",
+    "name": "에너지 보울",
+    "category": "other",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["vegetarian", "glutenFree", "lowCalorie"],
+    "tags": ["건강", "곡물", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "chicken_teriyaki_bowl",
+    "name": "치킨 테리야끼 보울",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "닭", "덮밥", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "spicy_pork_bowl",
+    "name": "매운 돼지고기덮밥",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "돼지고기", "덮밥", "매운"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "shrimp_bowl",
+    "name": "새우덮밥",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["밥", "새우", "덮밥"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "tofu_bowl",
+    "name": "두부 보울",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["vegetarian", "glutenFree", "lowCalorie"],
+    "tags": ["두부", "건강", "혼밥"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "dosirak",
+    "name": "편의점 도시락",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["간편", "혼밥", "밥"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "triangle_gimbap",
+    "name": "삼각김밥",
+    "category": "other",
+    "mealTypes": ["breakfast", "lunch"],
+    "restrictions": ["none"],
+    "tags": ["간편", "밥", "혼밥"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "cup_ramyeon",
+    "name": "컵라면",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["면", "간편", "혼밥"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "shawarma",
+    "name": "샤와르마",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["중동", "고기", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "falafel",
+    "name": "팔라펠",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["vegetarian"],
+    "tags": ["중동", "콩", "건강", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "kebab",
+    "name": "케밥",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["none"],
+    "tags": ["터키", "고기", "간편"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "bibimbap_bowl",
+    "name": "비빔밥 보울",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["밥", "야채", "퓨전", "트렌드"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "salmon_avocado_bowl",
+    "name": "연어아보카도 보울",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["연어", "아보카도", "트렌드", "건강"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "spicy_salmon_bowl",
+    "name": "스파이시 연어덮밥",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["연어", "매운", "트렌드", "덮밥"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "teriyaki_salmon",
+    "name": "데리야끼 연어",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree"],
+    "tags": ["연어", "구이", "건강"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "quinoa_salad",
+    "name": "퀴노아 샐러드",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["vegetarian", "glutenFree", "lowCalorie"],
+    "tags": ["곡물", "야채", "건강", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "buddha_bowl",
+    "name": "부다 보울",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["vegetarian", "glutenFree", "lowCalorie"],
+    "tags": ["야채", "건강", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "veggie_wrap",
+    "name": "채소 랩",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["vegetarian", "lowCalorie"],
+    "tags": ["야채", "건강", "간편"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "chicken_breast_dosirak",
+    "name": "닭가슴살 도시락",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["닭", "건강", "다이어트", "간편"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "oatmeal",
+    "name": "오트밀",
+    "category": "other",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian", "lowCalorie"],
+    "tags": ["오트", "건강", "아침", "트렌드"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "banana_pancake",
+    "name": "바나나 팬케이크",
+    "category": "other",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["vegetarian"],
+    "tags": ["과일", "달콤", "브런치"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "rice_paper_roll",
+    "name": "라이스페이퍼 롤",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["vegetarian", "glutenFree", "lowCalorie"],
+    "tags": ["야채", "건강", "트렌드", "베트남"],
+    "baseScore": 0.9
+  },
+  {
+    "id": "hummus_plate",
+    "name": "후무스 플레이트",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["vegetarian", "glutenFree"],
+    "tags": ["중동", "건강", "트렌드"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "pita_sandwich",
+    "name": "피타 샌드위치",
+    "category": "other",
+    "mealTypes": ["lunch"],
+    "restrictions": ["none"],
+    "tags": ["빵", "중동", "간편"],
+    "baseScore": 0.8
+  },
+  {
+    "id": "grilled_chicken",
+    "name": "그릴드 치킨",
+    "category": "other",
+    "mealTypes": ["lunch", "dinner"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["닭", "구이", "건강"],
+    "baseScore": 1.0
+  },
+  {
+    "id": "congee",
+    "name": "중화죽",
+    "category": "other",
+    "mealTypes": ["breakfast"],
+    "restrictions": ["glutenFree", "lowCalorie"],
+    "tags": ["죽", "가벼운", "아침"],
+    "baseScore": 0.8
+  }
+]

@@ -16,7 +16,7 @@ struct RecommendationEngineTests {
     @Test func filtersByMealType() {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.lunch], restrictions: [.none], categories: FoodCategory.allCases)
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [])
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
         for food in results {
             #expect(food.mealTypes.contains(.lunch))
         }
@@ -25,7 +25,7 @@ struct RecommendationEngineTests {
     @Test func returnsMaxFiveItems() {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.lunch], restrictions: [.none], categories: FoodCategory.allCases)
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [])
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
         #expect(results.count <= 5)
         #expect(results.count >= 1)
     }
@@ -35,7 +35,7 @@ struct RecommendationEngineTests {
     @Test func filtersVegetarianRestriction() {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.lunch], restrictions: [.vegetarian], categories: FoodCategory.allCases)
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [])
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
         for food in results {
             #expect(food.restrictions.contains(.vegetarian))
         }
@@ -44,7 +44,7 @@ struct RecommendationEngineTests {
     @Test func filtersLowCalorie() {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.lunch], restrictions: [.lowCalorie], categories: FoodCategory.allCases)
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [])
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
         for food in results {
             #expect(food.restrictions.contains(.lowCalorie))
         }
@@ -53,7 +53,7 @@ struct RecommendationEngineTests {
     @Test func noneRestrictionShowsAll() {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.lunch], restrictions: [.none], categories: FoodCategory.allCases)
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [])
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
         #expect(results.count >= 1)
     }
 
@@ -62,7 +62,7 @@ struct RecommendationEngineTests {
     @Test func preferredCategoriesRankHigher() {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.lunch], restrictions: [.none], categories: [.korean])
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [])
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
         if let first = results.first {
             #expect(first.category == .korean)
         }
@@ -77,7 +77,7 @@ struct RecommendationEngineTests {
             RecentLog(foodName: "비빔밥", date: Date()),
             RecentLog(foodName: "김치찌개", date: Date()),
         ]
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: recentLogs, feedbacks: [])
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: recentLogs, feedbacks: [], allFoods: FoodDatabase.allFoods)
         let names = results.map(\.name)
         #expect(!names.contains("비빔밥"))
         #expect(!names.contains("김치찌개"))
@@ -89,7 +89,7 @@ struct RecommendationEngineTests {
         let engine = RecommendationEngine()
         var profile = makeProfile(mealPattern: [.lunch], restrictions: [.none], categories: FoodCategory.allCases)
         profile.dislikes = ["비빔밥"]
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [])
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
         let names = results.map(\.name)
         #expect(!names.contains("비빔밥"))
     }
@@ -100,7 +100,7 @@ struct RecommendationEngineTests {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.lunch], restrictions: [.none], categories: FoodCategory.allCases)
         let feedbacks = [FeedbackEntry(foodId: "bibimbap", isLiked: false)]
-        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: feedbacks)
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: feedbacks, allFoods: FoodDatabase.allFoods)
         // 비빔밥이 있다면 상위 순위가 아닐 것
         if let index = results.firstIndex(where: { $0.id == "bibimbap" }) {
             #expect(index > 0) // not first
@@ -113,7 +113,8 @@ struct RecommendationEngineTests {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.breakfast, .lunch, .dinner], restrictions: [.none], categories: FoodCategory.allCases)
         for mealType in MealType.allCases {
-            let results = engine.recommend(for: mealType, profile: profile, recentLogs: [], feedbacks: [])
+            let results = engine.recommend(for: mealType, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
+
             #expect(!results.isEmpty, "Should have recommendations for \(mealType.displayName)")
         }
     }

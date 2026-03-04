@@ -32,9 +32,9 @@ final class RecommendationEngine {
         for mealType: MealType,
         profile: ProfileData,
         recentLogs: [RecentLog],
-        feedbacks: [FeedbackEntry]
+        feedbacks: [FeedbackEntry],
+        allFoods: [FoodItem]
     ) -> [FoodItem] {
-        let allFoods = FoodDatabase.allFoods
 
         // 1. Filter by meal type
         var candidates = allFoods.filter { $0.mealTypes.contains(mealType) }
