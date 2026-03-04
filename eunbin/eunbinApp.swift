@@ -14,6 +14,7 @@ struct eunbinApp: App {
         let schema = Schema([
             UserProfile.self,
             MealLog.self,
+            FeedbackRecord.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
