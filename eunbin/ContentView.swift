@@ -9,12 +9,29 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var profiles: [UserProfile]
+    @State private var showOnboarding = false
+
+    private var hasCompletedOnboarding: Bool {
+        profiles.first?.hasCompletedOnboarding == true
+    }
+
     var body: some View {
-        Text("식사 추천 앱")
-            .font(.title)
+        Group {
+            if hasCompletedOnboarding {
+                Text("메인 추천 화면 (준비 중)")
+                    .font(.title)
+            } else {
+                OnboardingView {
+                    showOnboarding = false
+                }
+            }
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: [UserProfile.self, MealLog.self], inMemory: true)
 }
