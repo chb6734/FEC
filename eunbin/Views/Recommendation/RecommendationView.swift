@@ -14,6 +14,7 @@ struct RecommendationView: View {
     @Query(sort: \MealLog.timestamp, order: .reverse) private var logs: [MealLog]
     @Query private var feedbacks: [FeedbackRecord]
     @State private var viewModel = RecommendationViewModel()
+    @State private var feedbackVM = FeedbackViewModel()
     @State private var selectedFood: FoodItem?
     @State private var showManualLogging = false
 
@@ -23,24 +24,31 @@ struct RecommendationView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    // Meal Time Header
                     mealTimeHeader
 
-                    // Recommendation Cards
                     if viewModel.recommendations.isEmpty {
                         emptyState
                     } else {
                         LazyVStack(spacing: 12) {
                             ForEach(viewModel.recommendations) { food in
-                                FoodCard(food: food) {
-                                    selectedFood = food
-                                }
+                                FoodCard(
+                                    food: food,
+                                    feedbackState: feedbackVM.getFeedback(for: food.id, in: feedbacks),
+                                    onTap: { selectedFood = food },
+                                    onLike: {
+                                        feedbackVM.toggleFeedback(foodId: food.id, isLiked: true, feedbacks: feedbacks)
+                                        feedbackVM.savePendingFeedbacks(to: modelContext, existing: feedbacks)
+                                    },
+                                    onDislike: {
+                                        feedbackVM.toggleFeedback(foodId: food.id, isLiked: false, feedbacks: feedbacks)
+                                        feedbackVM.savePendingFeedbacks(to: modelContext, existing: feedbacks)
+                                    }
+                                )
                             }
                         }
                         .padding(.horizontal)
                     }
 
-                    // Manual Logging Button
                     Button {
                         showManualLogging = true
                     } label: {
@@ -116,50 +124,71 @@ struct RecommendationView: View {
 
 struct FoodCard: View {
     let food: FoodItem
+    let feedbackState: Bool?
     let onTap: () -> Void
+    let onLike: () -> Void
+    let onDislike: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
-            HStack(spacing: 16) {
-                Text(food.category.emoji)
-                    .font(.system(size: 36))
-                    .frame(width: 56, height: 56)
-                    .background(Color(.systemGray6))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+        HStack(spacing: 12) {
+            // Main card content (tappable)
+            Button(action: onTap) {
+                HStack(spacing: 16) {
+                    Text(food.category.emoji)
+                        .font(.system(size: 36))
+                        .frame(width: 56, height: 56)
+                        .background(Color(.systemGray6))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(food.name)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-                    HStack(spacing: 6) {
-                        Text(food.category.displayName)
-                            .font(.caption)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 2)
-                            .background(Color.orange.opacity(0.15))
-                            .foregroundStyle(.orange)
-                            .clipShape(Capsule())
-                        ForEach(food.tags.prefix(2), id: \.self) { tag in
-                            Text(tag)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(food.name)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                        HStack(spacing: 6) {
+                            Text(food.category.displayName)
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 2)
+                                .background(Color.orange.opacity(0.15))
+                                .foregroundStyle(.orange)
+                                .clipShape(Capsule())
+                            ForEach(food.tags.prefix(2), id: \.self) { tag in
+                                Text(tag)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                     }
+
+                    Spacer()
                 }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
             }
-            .padding()
-            .background(Color(.systemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: .black.opacity(0.06), radius: 8, y: 2)
+            .buttonStyle(.plain)
+
+            // Feedback buttons
+            VStack(spacing: 8) {
+                Button(action: onLike) {
+                    Image(systemName: feedbackState == true ? "heart.fill" : "heart")
+                        .font(.system(size: 18))
+                        .foregroundStyle(feedbackState == true ? .red : .secondary)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("맘에 들어요")
+
+                Button(action: onDislike) {
+                    Image(systemName: feedbackState == false ? "hand.thumbsdown.fill" : "hand.thumbsdown")
+                        .font(.system(size: 18))
+                        .foregroundStyle(feedbackState == false ? .blue : .secondary)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("별로예요")
+            }
         }
-        .buttonStyle(.plain)
+        .padding()
+        .background(Color(.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: .black.opacity(0.06), radius: 8, y: 2)
+        .accessibilityElement(children: .contain)
         .accessibilityLabel("\(food.name), \(food.category.displayName)")
     }
 }
-
