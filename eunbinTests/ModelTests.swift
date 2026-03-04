@@ -179,7 +179,7 @@ struct MealLogTests {
 struct FoodDatabaseTests {
     @Test func loadsAllFoods() {
         let foods = FoodDatabase.allFoods
-        #expect(foods.count >= 50)
+        #expect(foods.count >= 200)
     }
 
     @Test func hasAllCategories() {
