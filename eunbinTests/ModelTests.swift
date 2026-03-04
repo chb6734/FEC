@@ -58,6 +58,28 @@ struct MealTypeTests {
         #expect(MealType.lunch.displayName == "점심")
         #expect(MealType.dinner.displayName == "저녁")
     }
+
+    @Test func currentMealTypeMapping() {
+        let cal = Calendar.current
+        func dateAt(hour: Int) -> Date {
+            cal.date(bySettingHour: hour, minute: 0, second: 0, of: Date())!
+        }
+        // 야간 → 아침
+        #expect(MealType.current(at: dateAt(hour: 2)) == .breakfast)
+        #expect(MealType.current(at: dateAt(hour: 5)) == .breakfast)
+        // 아침
+        #expect(MealType.current(at: dateAt(hour: 7)) == .breakfast)
+        // 아침~점심 사이 → 점심
+        #expect(MealType.current(at: dateAt(hour: 10)) == .lunch)
+        // 점심
+        #expect(MealType.current(at: dateAt(hour: 12)) == .lunch)
+        // 점심~저녁 사이 → 저녁
+        #expect(MealType.current(at: dateAt(hour: 15)) == .dinner)
+        // 저녁
+        #expect(MealType.current(at: dateAt(hour: 19)) == .dinner)
+        // 야간 → 아침
+        #expect(MealType.current(at: dateAt(hour: 23)) == .breakfast)
+    }
 }
 
 // MARK: - DietaryRestriction Tests

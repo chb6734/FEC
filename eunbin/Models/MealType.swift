@@ -50,9 +50,11 @@ enum MealType: String, Codable, CaseIterable, Identifiable {
         let hour = Calendar.current.component(.hour, from: date)
         switch hour {
         case 6..<10: return .breakfast
+        case 10..<11: return .lunch   // 아침~점심 사이 → 점심
         case 11..<14: return .lunch
+        case 14..<17: return .dinner  // 점심~저녁 사이 → 저녁
         case 17..<21: return .dinner
-        default: return .lunch
+        default: return .breakfast    // 21시~6시(야간) → 다음 아침
         }
     }
 }
