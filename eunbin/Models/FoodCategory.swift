@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum FoodCategory: String, Codable, CaseIterable, Identifiable {
     case korean
@@ -36,6 +37,17 @@ enum FoodCategory: String, Codable, CaseIterable, Identifiable {
         case .western: "🍝"
         case .snack: "🍢"
         case .other: "🍽️"
+        }
+    }
+
+    var themeColor: Color {
+        switch self {
+        case .korean: .orange
+        case .chinese: .red
+        case .japanese: .pink
+        case .western: .blue
+        case .snack: .yellow
+        case .other: .purple
         }
     }
 }

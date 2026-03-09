@@ -14,9 +14,21 @@ import Observation
 final class RecommendationViewModel {
     var recommendations: [FoodItem] = []
     var currentMealType: MealType = .lunch
+    var currentCardIndex: Int = 0
 
     private let engine = RecommendationEngine()
     private var foodDataService: FoodDataService?
+
+    var currentCard: FoodItem? {
+        guard currentCardIndex < recommendations.count else { return nil }
+        return recommendations[currentCardIndex]
+    }
+
+    func advanceCard() {
+        if currentCardIndex < recommendations.count - 1 {
+            currentCardIndex += 1
+        }
+    }
 
     func configure(modelContext: ModelContext) {
         if foodDataService == nil {
@@ -26,6 +38,7 @@ final class RecommendationViewModel {
 
     func loadRecommendations(profile: UserProfile?, logs: [MealLog], feedbacks: [FeedbackRecord]) {
         currentMealType = MealType.current()
+        currentCardIndex = 0
 
         guard let profile else {
             recommendations = []
