@@ -22,12 +22,19 @@ struct RecommendationEngineTests {
         }
     }
 
-    @Test func returnsMaxFiveItems() {
+    @Test func returnsMaxThreeItems() {
         let engine = RecommendationEngine()
         let profile = makeProfile(mealPattern: [.lunch], restrictions: [.none], categories: FoodCategory.allCases)
         let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
-        #expect(results.count <= 5)
+        #expect(results.count <= 3)
         #expect(results.count >= 1)
+    }
+
+    @Test func returnsExactlyThreeWhenEnoughCandidates() {
+        let engine = RecommendationEngine()
+        let profile = makeProfile(mealPattern: [.lunch], restrictions: [.none], categories: FoodCategory.allCases)
+        let results = engine.recommend(for: .lunch, profile: profile, recentLogs: [], feedbacks: [], allFoods: FoodDatabase.allFoods)
+        #expect(results.count == 3) // PRD: exactly 3 recommendations
     }
 
     // MARK: - Restriction Filtering

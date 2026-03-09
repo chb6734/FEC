@@ -25,7 +25,7 @@ struct FeedbackEntry {
 }
 
 final class RecommendationEngine {
-    private let maxResults = 5
+    private let maxResults = 3
     private let recentAvoidanceDays = 3
 
     func recommend(
