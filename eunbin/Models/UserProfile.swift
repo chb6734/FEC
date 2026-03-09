@@ -17,8 +17,14 @@ final class UserProfile {
     var hasCompletedOnboarding: Bool = false
     var customMealTimeStart: String?
     var customMealTimeEnd: String?
+    var budgetRaw: String?
 
     init() {}
+
+    var budget: BudgetRange? {
+        get { budgetRaw.flatMap { BudgetRange(rawValue: $0) } }
+        set { budgetRaw = newValue?.rawValue }
+    }
 
     var mealPattern: [MealType] {
         get { mealPatternRaw.compactMap { MealType(rawValue: $0) } }

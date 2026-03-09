@@ -14,6 +14,7 @@ enum OnboardingStep: Int, CaseIterable {
     case mealPattern
     case restrictions
     case categories
+    case budget
     case dislikes
     case complete
 
@@ -23,6 +24,7 @@ enum OnboardingStep: Int, CaseIterable {
         case .mealPattern: return "주로 식사하는 시간대는?"
         case .restrictions: return "식이 제한사항이 있나요?"
         case .categories: return "좋아하는 요리는?"
+        case .budget: return "평소 식사 비용대는?"
         case .dislikes: return "싫어하는 음식이 있나요?"
         case .complete: return "준비 완료!"
         }
@@ -34,6 +36,7 @@ enum OnboardingStep: Int, CaseIterable {
         case .mealPattern: return "여러 개 선택할 수 있어요"
         case .restrictions: return "해당되는 항목을 모두 선택하세요"
         case .categories: return "좋아하는 요리를 모두 선택하세요"
+        case .budget: return "하나를 선택하세요 (선택)"
         case .dislikes: return "쉼표(,)로 구분해서 입력하세요 (선택)"
         case .complete: return "이제 맞춤 추천을 시작할게요"
         }
@@ -54,6 +57,7 @@ final class OnboardingViewModel {
     var selectedMealPatterns: Set<MealType> = []
     var selectedRestrictions: Set<DietaryRestriction> = []
     var selectedCategories: Set<FoodCategory> = []
+    var selectedBudget: BudgetRange?
     var dislikeText: String = ""
 
     var progress: Double {
@@ -64,7 +68,7 @@ final class OnboardingViewModel {
 
     var canProceed: Bool {
         switch currentStep {
-        case .welcome, .dislikes, .complete:
+        case .welcome, .budget, .dislikes, .complete:
             return true
         case .mealPattern:
             return !selectedMealPatterns.isEmpty
@@ -98,6 +102,7 @@ final class OnboardingViewModel {
         profile.mealPattern = Array(selectedMealPatterns)
         profile.restrictions = Array(selectedRestrictions)
         profile.preferredCategories = Array(selectedCategories)
+        profile.budget = selectedBudget
         profile.dislikes = parsedDislikes
         profile.hasCompletedOnboarding = true
         modelContext.insert(profile)

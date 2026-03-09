@@ -36,6 +36,8 @@ struct OnboardingView: View {
                     restrictionsContent
                 case .categories:
                     categoriesContent
+                case .budget:
+                    budgetContent
                 case .dislikes:
                     dislikesContent
                 case .complete:
@@ -123,6 +125,28 @@ struct OnboardingView: View {
         }
     }
 
+    // MARK: - Budget
+
+    private var budgetContent: some View {
+        VStack(spacing: 24) {
+            stepHeader(viewModel.currentStep)
+            FlowLayout(spacing: 12) {
+                ForEach(BudgetRange.allCases) { budget in
+                    ChipButton(
+                        title: budget.displayName,
+                        isSelected: viewModel.selectedBudget == budget
+                    ) {
+                        if viewModel.selectedBudget == budget {
+                            viewModel.selectedBudget = nil
+                        } else {
+                            viewModel.selectedBudget = budget
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // MARK: - Dislikes
 
     private var dislikesContent: some View {
@@ -171,7 +195,7 @@ struct OnboardingView: View {
 
             Button(viewModel.currentStep == .complete ? "시작하기" :
                    viewModel.currentStep == .welcome ? "시작" :
-                   viewModel.currentStep == .dislikes ? "건너뛰기 / 다음" : "다음") {
+                   (viewModel.currentStep == .budget || viewModel.currentStep == .dislikes) ? "건너뛰기 / 다음" : "다음") {
                 if viewModel.currentStep == .complete {
                     viewModel.saveProfile(to: modelContext)
                     onComplete()

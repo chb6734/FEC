@@ -101,6 +101,26 @@ struct DietaryRestrictionTests {
     }
 }
 
+// MARK: - BudgetRange Tests
+
+struct BudgetRangeTests {
+    @Test func allCasesExist() {
+        let allCases = BudgetRange.allCases
+        #expect(allCases.count == 4)
+        #expect(allCases.contains(.budget))
+        #expect(allCases.contains(.medium))
+        #expect(allCases.contains(.premium))
+        #expect(allCases.contains(.noPreference))
+    }
+
+    @Test func displayNames() {
+        #expect(BudgetRange.budget.displayName == "가성비 (1만원 이하)")
+        #expect(BudgetRange.medium.displayName == "적당히 (1~2만원)")
+        #expect(BudgetRange.premium.displayName == "넉넉히 (2만원 이상)")
+        #expect(BudgetRange.noPreference.displayName == "상관없음")
+    }
+}
+
 // MARK: - FoodItem Tests
 
 struct FoodItemTests {
@@ -161,12 +181,19 @@ struct UserProfileTests {
         profile.preferredCategories = [.korean, .japanese]
         profile.dislikes = ["고수"]
         profile.hasCompletedOnboarding = true
+        profile.budget = .medium
 
         #expect(profile.mealPattern.count == 2)
         #expect(profile.restrictions.contains(.vegetarian))
         #expect(profile.preferredCategories.contains(.korean))
         #expect(profile.dislikes.contains("고수"))
         #expect(profile.hasCompletedOnboarding == true)
+        #expect(profile.budget == .medium)
+    }
+
+    @Test func defaultBudgetIsNil() {
+        let profile = UserProfile()
+        #expect(profile.budget == nil)
     }
 }
 

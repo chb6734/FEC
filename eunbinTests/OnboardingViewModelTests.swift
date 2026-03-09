@@ -57,8 +57,12 @@ struct OnboardingViewModelTests {
         vm.nextStep()
         #expect(vm.currentStep == .categories)
 
-        // Categories → Dislikes
+        // Categories → Budget (PRD optional question ④)
         vm.selectedCategories.insert(.korean)
+        vm.nextStep()
+        #expect(vm.currentStep == .budget)
+
+        // Budget → Dislikes
         vm.nextStep()
         #expect(vm.currentStep == .dislikes)
 
@@ -131,5 +135,27 @@ struct OnboardingViewModelTests {
         let vm = OnboardingViewModel()
         vm.dislikeText = ""
         #expect(vm.parsedDislikes.isEmpty)
+    }
+
+    // MARK: - Budget
+
+    @Test func budgetIsOptional() {
+        let vm = OnboardingViewModel()
+        vm.currentStep = .budget
+        #expect(vm.canProceed == true) // budget is optional
+    }
+
+    @Test func selectBudgetRange() {
+        let vm = OnboardingViewModel()
+        vm.selectedBudget = .medium
+        #expect(vm.selectedBudget == .medium)
+    }
+
+    @Test func budgetStepTitle() {
+        #expect(OnboardingStep.budget.title == "평소 식사 비용대는?")
+    }
+
+    @Test func budgetStepIsNotRequired() {
+        #expect(OnboardingStep.budget.isRequired == false)
     }
 }
