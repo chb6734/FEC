@@ -124,6 +124,21 @@ struct FoodItemTests {
         #expect(food.restrictions.contains(.none))
         #expect(food.tags.contains("밥"))
         #expect(food.baseScore == 1.0)
+        #expect(food.imagePath == nil) // PRD: imagePath is nullable
+    }
+
+    @Test func initializesWithImagePath() {
+        let food = FoodItem(
+            id: "bibimbap",
+            name: "비빔밥",
+            category: .korean,
+            mealTypes: [.lunch, .dinner],
+            restrictions: [.none],
+            tags: ["밥", "야채"],
+            baseScore: 1.0,
+            imagePath: "images/bibimbap.jpg"
+        )
+        #expect(food.imagePath == "images/bibimbap.jpg")
     }
 }
 

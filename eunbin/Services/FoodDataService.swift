@@ -31,7 +31,8 @@ final class FoodDataService {
                 mealTypes: food.mealTypes,
                 restrictions: food.restrictions,
                 tags: food.tags,
-                baseScore: food.baseScore
+                baseScore: food.baseScore,
+                imagePath: food.imagePath
             )
             modelContext.insert(entity)
         }

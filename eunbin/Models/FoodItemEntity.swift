@@ -17,10 +17,11 @@ final class FoodItemEntity {
     var restrictionsRaw: [String]
     var tags: [String]
     var baseScore: Double
+    var imagePath: String?
 
     init(foodId: String, name: String, category: FoodCategory,
          mealTypes: [MealType], restrictions: [DietaryRestriction],
-         tags: [String], baseScore: Double) {
+         tags: [String], baseScore: Double, imagePath: String? = nil) {
         self.foodId = foodId
         self.name = name
         self.categoryRaw = category.rawValue
@@ -28,6 +29,7 @@ final class FoodItemEntity {
         self.restrictionsRaw = restrictions.map(\.rawValue)
         self.tags = tags
         self.baseScore = baseScore
+        self.imagePath = imagePath
     }
 
     var category: FoodCategory {
@@ -50,7 +52,8 @@ final class FoodItemEntity {
             mealTypes: mealTypes,
             restrictions: restrictions,
             tags: tags,
-            baseScore: baseScore
+            baseScore: baseScore,
+            imagePath: imagePath
         )
     }
 }
