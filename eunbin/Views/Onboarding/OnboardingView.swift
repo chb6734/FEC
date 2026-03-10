@@ -15,199 +15,175 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Progress Bar
-            if viewModel.currentStep != .welcome && viewModel.currentStep != .complete {
-                ProgressView(value: viewModel.progress)
-                    .tint(.orange)
-                    .padding(.horizontal)
-                    .padding(.top, 8)
-            }
+            // Brand
+            Text("Plouf")
+                .font(.system(size: 32, weight: .bold, design: .serif))
+                .foregroundStyle(AppDesign.navy)
+                .padding(.top, 40)
 
-            Spacer()
+            // Progress Bar
+            progressBar
+                .padding(.top, 16)
+                .padding(.horizontal, AppDesign.horizontalPadding)
+
+            // Question
+            Text(viewModel.currentStep.title)
+                .font(.title2.bold())
+                .foregroundStyle(AppDesign.navy)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 28)
+                .padding(.horizontal, AppDesign.horizontalPadding)
+
+            // Subtitle
+            if !viewModel.currentStep.subtitle.isEmpty {
+                Text(viewModel.currentStep.subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(AppDesign.subtitleGray)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 4)
+                    .padding(.horizontal, AppDesign.horizontalPadding)
+            }
 
             // Content
             Group {
                 switch viewModel.currentStep {
-                case .welcome:
-                    welcomeContent
                 case .mealPattern:
                     mealPatternContent
                 case .restrictions:
                     restrictionsContent
                 case .categories:
                     categoriesContent
-                case .budget:
-                    budgetContent
-                case .dislikes:
-                    dislikesContent
-                case .complete:
-                    completeContent
                 }
             }
-            .padding(.horizontal, 24)
+            .padding(.top, 24)
+            .padding(.horizontal, AppDesign.horizontalPadding)
 
             Spacer()
 
-            // Navigation Buttons
-            navigationButtons
-                .padding(.horizontal, 24)
-                .padding(.bottom, 32)
+            // CTA Button
+            ctaButton
+                .padding(.horizontal, AppDesign.horizontalPadding)
+                .padding(.bottom, 40)
         }
+        .background(AppDesign.beige.ignoresSafeArea())
         .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)
     }
 
-    // MARK: - Welcome
+    // MARK: - Progress Bar (3 segments)
 
-    private var welcomeContent: some View {
-        VStack(spacing: 16) {
-            Text("🍽️")
-                .font(.system(size: 80))
-            Text("식사 추천")
-                .font(.largeTitle.bold())
-            Text("무엇을 먹을지 고민될 때,\n나에게 맞는 음식을 추천해드려요")
-                .font(.body)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
+    private var progressBar: some View {
+        HStack(spacing: 8) {
+            ForEach(0..<OnboardingStep.totalSteps, id: \.self) { index in
+                RoundedRectangle(cornerRadius: 2)
+                    .fill(index <= viewModel.currentStep.rawValue ? AppDesign.navy : AppDesign.chipBorder)
+                    .frame(height: 3)
+            }
         }
     }
 
-    // MARK: - Meal Pattern
+    // MARK: - Meal Pattern (Full-width list buttons)
 
     private var mealPatternContent: some View {
-        VStack(spacing: 24) {
-            stepHeader(viewModel.currentStep)
-            FlowLayout(spacing: 12) {
-                ForEach(MealType.allCases) { type in
-                    ChipButton(
-                        title: "\(type.emoji) \(type.displayName)",
-                        isSelected: viewModel.selectedMealPatterns.contains(type)
-                    ) {
-                        toggleSelection(&viewModel.selectedMealPatterns, type)
-                    }
+        VStack(spacing: 12) {
+            ForEach(MealType.allCases) { type in
+                let isSelected = viewModel.selectedMealPatterns.contains(type)
+                Button {
+                    toggleSelection(&viewModel.selectedMealPatterns, type)
+                } label: {
+                    Text("\(type.displayName) (\(String(format: "%02d:00", type.startHour)) - \(String(format: "%02d:00", type.endHour)))")
+                        .font(.body.weight(.medium))
+                        .foregroundStyle(isSelected ? .white : AppDesign.navy)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 18)
+                        .background(isSelected ? AppDesign.navy : AppDesign.cardWhite)
+                        .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: AppDesign.cornerRadius)
+                                .stroke(isSelected ? AppDesign.navy : AppDesign.chipBorder, lineWidth: 1)
+                        )
                 }
             }
         }
     }
 
-    // MARK: - Restrictions
+    // MARK: - Restrictions (Capsule chips)
 
     private var restrictionsContent: some View {
-        VStack(spacing: 24) {
-            stepHeader(viewModel.currentStep)
-            FlowLayout(spacing: 12) {
-                ForEach(DietaryRestriction.allCases) { restriction in
-                    ChipButton(
-                        title: restriction.displayName,
-                        isSelected: viewModel.selectedRestrictions.contains(restriction)
-                    ) {
-                        toggleSelection(&viewModel.selectedRestrictions, restriction)
-                    }
+        FlowLayout(spacing: 10) {
+            ForEach(DietaryRestriction.allCases) { restriction in
+                let isSelected = viewModel.selectedRestrictions.contains(restriction)
+                Button {
+                    toggleSelection(&viewModel.selectedRestrictions, restriction)
+                } label: {
+                    Text(restriction.displayName)
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(isSelected ? .white : AppDesign.navy)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(isSelected ? AppDesign.navy : AppDesign.cardWhite)
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule()
+                                .stroke(isSelected ? AppDesign.navy : AppDesign.chipBorder, lineWidth: 1)
+                        )
                 }
             }
         }
     }
 
-    // MARK: - Categories
+    // MARK: - Categories (2-column grid)
 
     private var categoriesContent: some View {
-        VStack(spacing: 24) {
-            stepHeader(viewModel.currentStep)
-            FlowLayout(spacing: 12) {
-                ForEach(FoodCategory.allCases) { category in
-                    ChipButton(
-                        title: "\(category.emoji) \(category.displayName)",
-                        isSelected: viewModel.selectedCategories.contains(category)
-                    ) {
-                        toggleSelection(&viewModel.selectedCategories, category)
-                    }
+        let columns = [
+            GridItem(.flexible(), spacing: 12),
+            GridItem(.flexible(), spacing: 12)
+        ]
+        return LazyVGrid(columns: columns, spacing: 12) {
+            ForEach(FoodCategory.onboardingCases) { category in
+                let isSelected = viewModel.selectedCategories.contains(category)
+                Button {
+                    toggleSelection(&viewModel.selectedCategories, category)
+                } label: {
+                    Text(category.displayName)
+                        .font(.body.weight(.medium))
+                        .foregroundStyle(isSelected ? .white : AppDesign.navy)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(isSelected ? AppDesign.navy : AppDesign.cardWhite)
+                        .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: AppDesign.cornerRadius)
+                                .stroke(isSelected ? AppDesign.navy : AppDesign.chipBorder, lineWidth: 1)
+                        )
                 }
             }
         }
     }
 
-    // MARK: - Budget
+    // MARK: - CTA Button
 
-    private var budgetContent: some View {
-        VStack(spacing: 24) {
-            stepHeader(viewModel.currentStep)
-            FlowLayout(spacing: 12) {
-                ForEach(BudgetRange.allCases) { budget in
-                    ChipButton(
-                        title: budget.displayName,
-                        isSelected: viewModel.selectedBudget == budget
-                    ) {
-                        if viewModel.selectedBudget == budget {
-                            viewModel.selectedBudget = nil
-                        } else {
-                            viewModel.selectedBudget = budget
-                        }
-                    }
-                }
+    private var ctaButton: some View {
+        Button {
+            if viewModel.isLastStep {
+                viewModel.saveProfile(to: modelContext)
+                onComplete()
+            } else {
+                viewModel.nextStep()
             }
+        } label: {
+            Text(viewModel.isLastStep ? "시작하기" : "다음")
+                .font(.headline)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 18)
+                .background(viewModel.canProceed ? AppDesign.navy : AppDesign.disabledButton)
+                .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
         }
-    }
-
-    // MARK: - Dislikes
-
-    private var dislikesContent: some View {
-        VStack(spacing: 24) {
-            stepHeader(viewModel.currentStep)
-            TextField("예: 고수, 파, 민트", text: $viewModel.dislikeText)
-                .textFieldStyle(.roundedBorder)
-                .font(.body)
-        }
-    }
-
-    // MARK: - Complete
-
-    private var completeContent: some View {
-        VStack(spacing: 16) {
-            Text("🎉")
-                .font(.system(size: 80))
-            Text("준비 완료!")
-                .font(.largeTitle.bold())
-            Text("이제 맞춤 추천을 시작할게요")
-                .font(.body)
-                .foregroundStyle(.secondary)
-        }
+        .disabled(!viewModel.canProceed)
     }
 
     // MARK: - Helpers
-
-    private func stepHeader(_ step: OnboardingStep) -> some View {
-        VStack(spacing: 8) {
-            Text(step.title)
-                .font(.title2.bold())
-            Text(step.subtitle)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-        }
-    }
-
-    private var navigationButtons: some View {
-        HStack(spacing: 16) {
-            if viewModel.currentStep != .welcome && viewModel.currentStep != .complete {
-                Button("이전") {
-                    viewModel.previousStep()
-                }
-                .buttonStyle(.bordered)
-            }
-
-            Button(viewModel.currentStep == .complete ? "시작하기" :
-                   viewModel.currentStep == .welcome ? "시작" :
-                   (viewModel.currentStep == .budget || viewModel.currentStep == .dislikes) ? "건너뛰기 / 다음" : "다음") {
-                if viewModel.currentStep == .complete {
-                    viewModel.saveProfile(to: modelContext)
-                    onComplete()
-                } else {
-                    viewModel.nextStep()
-                }
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.orange)
-            .disabled(!viewModel.canProceed)
-        }
-    }
 
     private func toggleSelection<T: Hashable>(_ set: inout Set<T>, _ item: T) {
         if set.contains(item) {

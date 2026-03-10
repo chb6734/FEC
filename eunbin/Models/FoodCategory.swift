@@ -13,19 +13,23 @@ enum FoodCategory: String, Codable, CaseIterable, Identifiable {
     case chinese
     case japanese
     case western
-    case snack
+    case drinks
+    case dessert
+    case snack   // legacy: kept for DB compatibility
     case other
 
     var id: String { rawValue }
 
     var displayName: String {
         switch self {
-        case .korean: "한식"
-        case .chinese: "중식"
-        case .japanese: "일식"
-        case .western: "양식"
-        case .snack: "분식"
-        case .other: "기타"
+        case .korean: "Korean"
+        case .chinese: "Chinese"
+        case .japanese: "Japanese"
+        case .western: "Western"
+        case .drinks: "Drinks"
+        case .dessert: "Dessert"
+        case .snack: "Snack"
+        case .other: "Other"
         }
     }
 
@@ -35,6 +39,8 @@ enum FoodCategory: String, Codable, CaseIterable, Identifiable {
         case .chinese: "🇨🇳"
         case .japanese: "🇯🇵"
         case .western: "🍝"
+        case .drinks: "🥤"
+        case .dessert: "🍰"
         case .snack: "🍢"
         case .other: "🍽️"
         }
@@ -46,8 +52,15 @@ enum FoodCategory: String, Codable, CaseIterable, Identifiable {
         case .chinese: .red
         case .japanese: .pink
         case .western: .blue
+        case .drinks: .cyan
+        case .dessert: .brown
         case .snack: .yellow
         case .other: .purple
         }
+    }
+
+    /// Categories shown in onboarding (excludes legacy snack)
+    static var onboardingCases: [FoodCategory] {
+        [.korean, .chinese, .japanese, .western, .drinks, .dessert, .other]
     }
 }

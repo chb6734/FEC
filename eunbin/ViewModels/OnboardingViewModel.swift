@@ -10,50 +10,35 @@ import SwiftData
 import Observation
 
 enum OnboardingStep: Int, CaseIterable {
-    case welcome = 0
-    case mealPattern
+    case mealPattern = 0
     case restrictions
     case categories
-    case budget
-    case dislikes
-    case complete
 
     var title: String {
         switch self {
-        case .welcome: return "환영합니다!"
-        case .mealPattern: return "주로 식사하는 시간대는?"
+        case .mealPattern: return "주로 언제 식사하시나요?"
         case .restrictions: return "식이 제한사항이 있나요?"
-        case .categories: return "좋아하는 요리는?"
-        case .budget: return "평소 식사 비용대는?"
-        case .dislikes: return "싫어하는 음식이 있나요?"
-        case .complete: return "준비 완료!"
+        case .categories: return "선호하는 요리 카테고리는?"
         }
     }
 
     var subtitle: String {
         switch self {
-        case .welcome: return "맞춤 추천을 위해 몇 가지 질문을 드릴게요"
-        case .mealPattern: return "여러 개 선택할 수 있어요"
-        case .restrictions: return "해당되는 항목을 모두 선택하세요"
-        case .categories: return "좋아하는 요리를 모두 선택하세요"
-        case .budget: return "하나를 선택하세요 (선택)"
-        case .dislikes: return "쉼표(,)로 구분해서 입력하세요 (선택)"
-        case .complete: return "이제 맞춤 추천을 시작할게요"
+        case .mealPattern: return ""
+        case .restrictions: return "해당하는 항목을 모두 선택해주세요."
+        case .categories: return ""
         }
     }
 
-    var isRequired: Bool {
-        switch self {
-        case .mealPattern, .restrictions, .categories: return true
-        default: return false
-        }
-    }
+    var isRequired: Bool { true }
+
+    static var totalSteps: Int { allCases.count }
 }
 
 @MainActor
 @Observable
 final class OnboardingViewModel {
-    var currentStep: OnboardingStep = .welcome
+    var currentStep: OnboardingStep = .mealPattern
     var selectedMealPatterns: Set<MealType> = []
     var selectedRestrictions: Set<DietaryRestriction> = []
     var selectedCategories: Set<FoodCategory> = []
@@ -61,15 +46,13 @@ final class OnboardingViewModel {
     var dislikeText: String = ""
 
     var progress: Double {
-        let total = Double(OnboardingStep.allCases.count - 1) // exclude welcome
-        let current = Double(currentStep.rawValue)
-        return min(current / total, 1.0)
+        let total = Double(OnboardingStep.totalSteps)
+        let current = Double(currentStep.rawValue + 1)
+        return current / total
     }
 
     var canProceed: Bool {
         switch currentStep {
-        case .welcome, .budget, .dislikes, .complete:
-            return true
         case .mealPattern:
             return !selectedMealPatterns.isEmpty
         case .restrictions:
@@ -77,6 +60,14 @@ final class OnboardingViewModel {
         case .categories:
             return !selectedCategories.isEmpty
         }
+    }
+
+    var isLastStep: Bool {
+        currentStep == .categories
+    }
+
+    var isFirstStep: Bool {
+        currentStep == .mealPattern
     }
 
     var parsedDislikes: [String] {

@@ -23,7 +23,14 @@ struct RecommendationView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                mealTimeHeader
+                // Top bar
+                topBar
+                    .padding(.horizontal, AppDesign.horizontalPadding)
+                    .padding(.top, 8)
+
+                // Meal time badge
+                mealTimeBadge
+                    .padding(.top, 12)
 
                 if viewModel.recommendations.isEmpty {
                     Spacer()
@@ -33,38 +40,15 @@ struct RecommendationView: View {
                     Spacer()
                     cardStack
                     Spacer()
-                    feedbackButtons
-                        .padding(.bottom, 8)
                 }
 
-                Button {
-                    showManualLogging = true
-                } label: {
-                    Label("직접 입력하기", systemImage: "square.and.pencil")
-                        .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.orange)
-                }
-                .padding(.bottom, 24)
-            }
-            .navigationTitle("오늘 뭐 먹지?")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        viewModel.refresh(profile: profile, logs: logs, feedbacks: feedbacks)
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                }
-                ToolbarItem(placement: .topBarLeading) {
-                    if let profile {
-                        NavigationLink {
-                            SettingsView(profile: profile)
-                        } label: {
-                            Image(systemName: "gearshape")
-                        }
-                    }
+                // Bottom action buttons
+                if !viewModel.recommendations.isEmpty {
+                    actionButtons
+                        .padding(.bottom, 20)
                 }
             }
+            .background(AppDesign.beige.ignoresSafeArea())
             .sheet(item: $selectedFood) { food in
                 MealLoggingView(food: food) {
                     selectedFood = nil
@@ -81,23 +65,50 @@ struct RecommendationView: View {
                 viewModel.configure(modelContext: modelContext)
                 viewModel.loadRecommendations(profile: profile, logs: logs, feedbacks: feedbacks)
             }
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 
-    // MARK: - Meal Time Header
+    // MARK: - Top Bar
 
-    private var mealTimeHeader: some View {
-        VStack(spacing: 4) {
-            Text("\(viewModel.currentMealType.emoji) \(viewModel.currentMealType.displayName) 추천")
-                .font(.title2.bold())
-            Text("스와이프하여 메뉴를 탐색해보세요")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+    private var topBar: some View {
+        HStack {
+            Text("Plouf")
+                .font(.system(size: 24, weight: .bold, design: .serif))
+                .foregroundStyle(AppDesign.navy)
+
+            Spacer()
+
+            if let profile {
+                NavigationLink {
+                    SettingsView(profile: profile)
+                } label: {
+                    Image(systemName: "gearshape")
+                        .font(.system(size: 18))
+                        .foregroundStyle(AppDesign.navy)
+                }
+            }
         }
-        .padding()
     }
 
-    // MARK: - Card Stack (Tinder-style)
+    // MARK: - Meal Time Badge
+
+    private var mealTimeBadge: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "clock")
+                .font(.caption)
+            Text("\(viewModel.currentMealType.displayName) Recommendation")
+                .font(.subheadline.weight(.medium))
+        }
+        .foregroundStyle(AppDesign.navy)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        .background(AppDesign.cardWhite)
+        .clipShape(Capsule())
+        .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
+    }
+
+    // MARK: - Card Stack
 
     private var cardStack: some View {
         ZStack {
@@ -121,57 +132,76 @@ struct RecommendationView: View {
                 )
             }
         }
-        .padding(.horizontal, 24)
+        .padding(.horizontal, 32)
     }
 
-    // MARK: - Feedback Buttons
+    // MARK: - Action Buttons
 
-    private var feedbackButtons: some View {
-        HStack(spacing: 40) {
-            if let currentFood = viewModel.currentCard {
-                Button {
-                    feedbackVM.toggleFeedback(foodId: currentFood.id, isLiked: false, feedbacks: feedbacks)
+    private var actionButtons: some View {
+        HStack(spacing: 32) {
+            // Reject button
+            Button {
+                if let food = viewModel.currentCard {
+                    feedbackVM.toggleFeedback(foodId: food.id, isLiked: false, feedbacks: feedbacks)
                     feedbackVM.savePendingFeedbacks(to: modelContext, existing: feedbacks)
-                } label: {
-                    let isDisliked = feedbackVM.getFeedback(for: currentFood.id, in: feedbacks) == false
-                    Image(systemName: isDisliked ? "hand.thumbsdown.fill" : "hand.thumbsdown")
-                        .font(.system(size: 24))
-                        .foregroundStyle(isDisliked ? .blue : .secondary)
-                        .frame(width: 56, height: 56)
-                        .background(Color(.systemGray6))
-                        .clipShape(Circle())
+                    viewModel.advanceCard()
                 }
-                .accessibilityLabel("별로예요")
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(AppDesign.navy)
+                    .frame(width: 56, height: 56)
+                    .background(AppDesign.cardWhite)
+                    .clipShape(Circle())
+                    .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
+            }
 
-                Button {
-                    feedbackVM.toggleFeedback(foodId: currentFood.id, isLiked: true, feedbacks: feedbacks)
+            // Like button
+            Button {
+                if let food = viewModel.currentCard {
+                    feedbackVM.toggleFeedback(foodId: food.id, isLiked: true, feedbacks: feedbacks)
                     feedbackVM.savePendingFeedbacks(to: modelContext, existing: feedbacks)
-                } label: {
-                    let isLiked = feedbackVM.getFeedback(for: currentFood.id, in: feedbacks) == true
-                    Image(systemName: isLiked ? "heart.fill" : "heart")
-                        .font(.system(size: 24))
-                        .foregroundStyle(isLiked ? .red : .secondary)
-                        .frame(width: 56, height: 56)
-                        .background(Color(.systemGray6))
-                        .clipShape(Circle())
+                    selectedFood = food
+                    viewModel.advanceCard()
                 }
-                .accessibilityLabel("맘에 들어요")
+            } label: {
+                Image(systemName: "heart.fill")
+                    .font(.system(size: 20))
+                    .foregroundStyle(.white)
+                    .frame(width: 56, height: 56)
+                    .background(AppDesign.navy)
+                    .clipShape(Circle())
+                    .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
             }
         }
-        .padding(.vertical, 8)
     }
 
     // MARK: - Empty State
 
     private var emptyState: some View {
-        VStack(spacing: 12) {
-            Text("🤔")
-                .font(.system(size: 60))
+        VStack(spacing: 16) {
+            Image(systemName: "fork.knife")
+                .font(.system(size: 48))
+                .foregroundStyle(AppDesign.subtitleGray)
             Text("추천할 메뉴가 없어요")
                 .font(.headline)
+                .foregroundStyle(AppDesign.navy)
             Text("설정에서 선호도를 조정해보세요")
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(AppDesign.subtitleGray)
+
+            Button {
+                viewModel.refresh(profile: profile, logs: logs, feedbacks: feedbacks)
+            } label: {
+                Text("새로고침")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 10)
+                    .background(AppDesign.navy)
+                    .clipShape(Capsule())
+            }
+            .padding(.top, 8)
         }
     }
 }
@@ -193,17 +223,11 @@ struct SwipeableCard: View {
         Double(dragOffset.width) / 20.0
     }
 
-    private var swipeDirection: SwipeDirection? {
-        if dragOffset.width > 100 { return .right }
-        if dragOffset.width < -100 { return .left }
-        return nil
-    }
-
     var body: some View {
         if cardOffset >= 0 && cardOffset < 3 {
             cardContent
                 .scaleEffect(isTopCard ? 1.0 : 1.0 - CGFloat(cardOffset) * 0.05)
-                .offset(y: isTopCard ? 0 : CGFloat(cardOffset) * 12)
+                .offset(y: isTopCard ? 0 : CGFloat(cardOffset) * 10)
                 .offset(x: isTopCard ? dragOffset.width : 0,
                         y: isTopCard ? dragOffset.height : 0)
                 .rotationEffect(.degrees(isTopCard ? rotation : 0))
@@ -216,71 +240,37 @@ struct SwipeableCard: View {
 
     private var cardContent: some View {
         Button(action: onTap) {
-            VStack(spacing: 16) {
-                // Food emoji/image area
+            VStack(spacing: 0) {
+                // Top area with branding + image
                 ZStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(food.category.themeColor.opacity(0.1))
-                    Text(food.category.emoji)
-                        .font(.system(size: 72))
-                }
-                .frame(height: 200)
+                    VStack(spacing: 12) {
+                        Text("Plouf")
+                            .font(.system(size: 28, weight: .bold, design: .serif))
 
-                // Food info
-                VStack(spacing: 8) {
-                    Text(food.name)
-                        .font(.title.bold())
-                        .foregroundStyle(.primary)
+                        // Food image placeholder
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.white.opacity(0.9))
+                            .frame(width: 140, height: 120)
+                            .overlay(
+                                Text(food.category.emoji)
+                                    .font(.system(size: 56))
+                            )
 
-                    HStack(spacing: 8) {
-                        Text(food.category.displayName)
-                            .font(.subheadline.weight(.medium))
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 4)
-                            .background(food.category.themeColor.opacity(0.15))
-                            .foregroundStyle(food.category.themeColor)
-                            .clipShape(Capsule())
+                        Spacer().frame(height: 8)
 
-                        ForEach(food.tags.prefix(2), id: \.self) { tag in
-                            Text("#\(tag)")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
+                        Text("[ \(food.name) ]")
+                            .font(.title3.bold())
                     }
+                    .padding(.vertical, 32)
                 }
-
-                // Swipe hint overlay
-                if isTopCard && isDragging {
-                    swipeHint
-                }
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(AppDesign.navy)
             }
-            .padding(24)
-            .frame(maxWidth: .infinity)
-            .background(Color(.systemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 24))
-            .overlay(
-                RoundedRectangle(cornerRadius: 24)
-                    .strokeBorder(food.category.themeColor.opacity(0.6), lineWidth: 3)
-            )
-            .shadow(color: .black.opacity(0.08), radius: 12, y: 4)
+            .background(AppDesign.cardWhite)
+            .clipShape(RoundedRectangle(cornerRadius: AppDesign.cardCornerRadius))
+            .shadow(color: .black.opacity(0.06), radius: 12, y: 4)
         }
         .buttonStyle(.plain)
-    }
-
-    @ViewBuilder
-    private var swipeHint: some View {
-        if let direction = swipeDirection {
-            Text(direction == .right ? "선택!" : "패스")
-                .font(.title3.bold())
-                .foregroundStyle(direction == .right ? .green : .red)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 6)
-                .background(
-                    Capsule()
-                        .fill(direction == .right ? Color.green.opacity(0.15) : Color.red.opacity(0.15))
-                )
-                .transition(.opacity)
-        }
     }
 
     private var dragGesture: some Gesture {
@@ -317,6 +307,31 @@ struct SwipeableCard: View {
     }
 }
 
-private enum SwipeDirection {
-    case left, right
+// MARK: - Preview
+
+#Preview("추천 화면") {
+    NavigationStack {
+        RecommendationView()
+            .modelContainer(for: [UserProfile.self, MealLog.self, FeedbackRecord.self])
+    }
+}
+
+#Preview("추천 카드만") {
+    SwipeableCard(
+        food: FoodItem(
+            id: "bibimbap",
+            name: "비빔밥",
+            category: .korean,
+            mealTypes: [.lunch, .dinner],
+            restrictions: [],
+            tags: ["건강", "야채"],
+            baseScore: 0.8
+        ),
+        isTopCard: true,
+        cardOffset: 0,
+        onSwipeLeft: { print("Swiped left") },
+        onSwipeRight: { print("Swiped right") },
+        onTap: { print("Tapped") }
+    )
+    .padding()
 }

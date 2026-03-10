@@ -8,18 +8,6 @@
 import SwiftUI
 import SwiftData
 
-// MARK: - Design Tokens
-
-private enum DesignToken {
-    static let backgroundBeige = Color(red: 0.96, green: 0.94, blue: 0.91)
-    static let textNavy = Color(red: 0.10, green: 0.10, blue: 0.35)
-    static let chipBackground = Color(red: 0.93, green: 0.91, blue: 0.88)
-    static let cardBackground = Color.white
-    static let resetRed = Color(red: 0.85, green: 0.20, blue: 0.20)
-    static let cardRadius: CGFloat = 20
-    static let chipRadius: CGFloat = 16
-}
-
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -48,7 +36,7 @@ struct SettingsView: View {
             }
             .padding(.vertical, 16)
         }
-        .background(DesignToken.backgroundBeige.ignoresSafeArea())
+        .background(AppDesign.beige.ignoresSafeArea())
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.light, for: .navigationBar)
@@ -57,7 +45,7 @@ struct SettingsView: View {
                 Button("수정") {
                     showEditSheet = true
                 }
-                .foregroundStyle(DesignToken.textNavy)
+                .foregroundStyle(AppDesign.navy)
                 .fontWeight(.semibold)
             }
         }
@@ -81,7 +69,7 @@ struct SettingsView: View {
     private func sectionHeader(_ title: String) -> some View {
         Text(title)
             .font(.title3.bold())
-            .foregroundStyle(DesignToken.textNavy)
+            .foregroundStyle(AppDesign.navy)
             .padding(.horizontal, 20)
     }
 
@@ -124,8 +112,8 @@ struct SettingsView: View {
             }
         }
         .padding(20)
-        .background(DesignToken.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: DesignToken.cardRadius))
+        .background(AppDesign.cardWhite)
+        .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
         .padding(.horizontal, 20)
     }
 
@@ -133,17 +121,17 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(DesignToken.textNavy)
+                .foregroundStyle(AppDesign.navy)
 
             FlowLayout(spacing: 8) {
                 ForEach(chips, id: \.self) { chip in
                     Text(chip)
                         .font(.subheadline.weight(.medium))
-                        .foregroundStyle(DesignToken.textNavy)
+                        .foregroundStyle(AppDesign.navy)
                         .padding(.horizontal, 14)
                         .padding(.vertical, 8)
-                        .background(DesignToken.chipBackground)
-                        .clipShape(RoundedRectangle(cornerRadius: DesignToken.chipRadius))
+                        .background(AppDesign.chipBorder.opacity(0.5))
+                        .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
                 }
             }
         }
@@ -155,17 +143,17 @@ struct SettingsView: View {
         HStack {
             Text("기록된 식사 횟수")
                 .font(.body)
-                .foregroundStyle(DesignToken.textNavy)
+                .foregroundStyle(AppDesign.navy)
 
             Spacer()
 
             Text("\(logs.count)번")
                 .font(.title2.bold())
-                .foregroundStyle(DesignToken.textNavy)
+                .foregroundStyle(AppDesign.navy)
         }
         .padding(20)
-        .background(DesignToken.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: DesignToken.cardRadius))
+        .background(AppDesign.cardWhite)
+        .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
         .padding(.horizontal, 20)
     }
 
@@ -180,14 +168,14 @@ struct SettingsView: View {
                 Text("초기화 및 다시 시작하기")
             }
             .font(.body.weight(.medium))
-            .foregroundStyle(DesignToken.resetRed)
+            .foregroundStyle(AppDesign.resetRed)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .background(DesignToken.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: DesignToken.cardRadius))
+            .background(AppDesign.cardWhite)
+            .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
             .overlay(
-                RoundedRectangle(cornerRadius: DesignToken.cardRadius)
-                    .stroke(DesignToken.resetRed.opacity(0.3), lineWidth: 1)
+                RoundedRectangle(cornerRadius: AppDesign.cornerRadius)
+                    .stroke(AppDesign.resetRed.opacity(0.3), lineWidth: 1)
             )
         }
         .padding(.horizontal, 20)

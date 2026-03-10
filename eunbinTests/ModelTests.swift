@@ -14,22 +14,31 @@ import Foundation
 struct FoodCategoryTests {
     @Test func allCasesExist() {
         let allCases = FoodCategory.allCases
-        #expect(allCases.count == 6)
+        #expect(allCases.count == 8)
         #expect(allCases.contains(.korean))
         #expect(allCases.contains(.chinese))
         #expect(allCases.contains(.japanese))
         #expect(allCases.contains(.western))
+        #expect(allCases.contains(.drinks))
+        #expect(allCases.contains(.dessert))
         #expect(allCases.contains(.snack))
         #expect(allCases.contains(.other))
     }
 
     @Test func displayNames() {
-        #expect(FoodCategory.korean.displayName == "한식")
-        #expect(FoodCategory.chinese.displayName == "중식")
-        #expect(FoodCategory.japanese.displayName == "일식")
-        #expect(FoodCategory.western.displayName == "양식")
-        #expect(FoodCategory.snack.displayName == "분식")
-        #expect(FoodCategory.other.displayName == "기타")
+        #expect(FoodCategory.korean.displayName == "Korean")
+        #expect(FoodCategory.chinese.displayName == "Chinese")
+        #expect(FoodCategory.japanese.displayName == "Japanese")
+        #expect(FoodCategory.western.displayName == "Western")
+        #expect(FoodCategory.drinks.displayName == "Drinks")
+        #expect(FoodCategory.dessert.displayName == "Dessert")
+        #expect(FoodCategory.other.displayName == "Other")
+    }
+
+    @Test func onboardingCasesExcludesSnack() {
+        let cases = FoodCategory.onboardingCases
+        #expect(cases.count == 7)
+        #expect(!cases.contains(.snack))
     }
 }
 
@@ -87,17 +96,22 @@ struct MealTypeTests {
 struct DietaryRestrictionTests {
     @Test func allCasesExist() {
         let allCases = DietaryRestriction.allCases
+        #expect(allCases.count == 6)
         #expect(allCases.contains(.none))
         #expect(allCases.contains(.vegetarian))
+        #expect(allCases.contains(.vegan))
         #expect(allCases.contains(.glutenFree))
         #expect(allCases.contains(.lowCalorie))
+        #expect(allCases.contains(.allergy))
     }
 
     @Test func displayNames() {
         #expect(DietaryRestriction.none.displayName == "없음")
-        #expect(DietaryRestriction.vegetarian.displayName == "채식")
-        #expect(DietaryRestriction.glutenFree.displayName == "글루텐프리")
-        #expect(DietaryRestriction.lowCalorie.displayName == "저칼로리")
+        #expect(DietaryRestriction.vegetarian.displayName == "Vegetarian")
+        #expect(DietaryRestriction.vegan.displayName == "Vegan")
+        #expect(DietaryRestriction.glutenFree.displayName == "Gluten Free")
+        #expect(DietaryRestriction.lowCalorie.displayName == "Low Calorie")
+        #expect(DietaryRestriction.allergy.displayName == "Allergy")
     }
 }
 
