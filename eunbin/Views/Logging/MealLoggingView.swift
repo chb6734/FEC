@@ -117,3 +117,24 @@ struct MealLoggingView: View {
         }
     }
 }
+
+#Preview("추천 메뉴 기록") {
+    MealLoggingView(
+        food: FoodItem(
+            id: "bibimbap",
+            name: "비빔밥",
+            category: .korean,
+            mealTypes: [.lunch, .dinner],
+            restrictions: [],
+            tags: ["건강"],
+            baseScore: 0.8
+        ),
+        onComplete: {}
+    )
+    .modelContainer(for: [MealLog.self], inMemory: true)
+}
+
+#Preview("직접 입력") {
+    MealLoggingView(onComplete: {})
+        .modelContainer(for: [MealLog.self], inMemory: true)
+}

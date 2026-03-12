@@ -29,3 +29,11 @@ struct ChipButton: View {
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }
+
+#Preview("ChipButton") {
+    HStack {
+        ChipButton(title: "선택됨", isSelected: true, action: {})
+        ChipButton(title: "미선택", isSelected: false, action: {})
+    }
+    .padding()
+}

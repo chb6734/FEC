@@ -12,7 +12,8 @@ struct FlowLayout: Layout {
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let result = arrangeSubviews(proposal: proposal, subviews: subviews)
-        return result.size
+        let width = proposal.width ?? result.size.width
+        return CGSize(width: width, height: result.size.height)
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
@@ -48,4 +49,17 @@ struct FlowLayout: Layout {
 
         return (positions, CGSize(width: totalWidth, height: currentY + lineHeight))
     }
+}
+
+#Preview("FlowLayout") {
+    FlowLayout(spacing: 8) {
+        ForEach(["한식", "중식", "일식", "양식", "디저트", "음료", "기타"], id: \.self) { tag in
+            Text(tag)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(Color.blue.opacity(0.1))
+                .clipShape(Capsule())
+        }
+    }
+    .padding()
 }

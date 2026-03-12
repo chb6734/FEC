@@ -193,3 +193,8 @@ struct OnboardingView: View {
         }
     }
 }
+
+#Preview("온보딩") {
+    OnboardingView(onComplete: {})
+        .modelContainer(for: [UserProfile.self, MealLog.self, FeedbackRecord.self, FoodItemEntity.self], inMemory: true)
+}

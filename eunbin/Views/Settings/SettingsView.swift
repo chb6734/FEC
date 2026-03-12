@@ -111,6 +111,7 @@ struct SettingsView: View {
                 )
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(20)
         .background(AppDesign.cardWhite)
         .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
@@ -283,5 +284,43 @@ struct SettingsEditView: View {
         } else {
             set.insert(item)
         }
+    }
+}
+
+// MARK: - Preview
+
+private func makePreviewContainer() -> (ModelContainer, UserProfile) {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(
+        for: UserProfile.self, MealLog.self,
+        configurations: config
+    )
+    let profile = UserProfile()
+    profile.hasCompletedOnboarding = true
+    profile.mealPatternRaw = [MealType.breakfast.rawValue, MealType.lunch.rawValue, MealType.dinner.rawValue]
+    profile.restrictionsRaw = [DietaryRestriction.vegetarian.rawValue]
+    profile.preferredCategoriesRaw = [FoodCategory.korean.rawValue, FoodCategory.japanese.rawValue]
+    profile.dislikes = ["고수", "파"]
+    profile.budgetRaw = BudgetRange.medium.rawValue
+    container.mainContext.insert(profile)
+    let log1 = MealLog(foodName: "비빔밥", mealType: .lunch, timestamp: Date())
+    let log2 = MealLog(foodName: "라면", mealType: .dinner, timestamp: Date())
+    container.mainContext.insert(log1)
+    container.mainContext.insert(log2)
+    return (container, profile)
+}
+
+#Preview("세팅 화면") {
+    let (container, profile) = makePreviewContainer()
+    NavigationStack {
+        SettingsView(profile: profile)
+            .modelContainer(container)
+    }
+}
+
+#Preview("프로필 수정 화면") {
+    let (_, profile) = makePreviewContainer()
+    NavigationStack {
+        SettingsEditView(profile: profile)
     }
 }
