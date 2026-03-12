@@ -32,7 +32,9 @@ struct RecommendationView: View {
                 mealTimeBadge
                     .padding(.top, 12)
 
-                if viewModel.recommendations.isEmpty {
+                if viewModel.hasReviewedAllCards {
+                    resultsList
+                } else if viewModel.recommendations.isEmpty {
                     Spacer()
                     emptyState
                     Spacer()
@@ -43,7 +45,7 @@ struct RecommendationView: View {
                 }
 
                 // Bottom action buttons
-                if !viewModel.recommendations.isEmpty {
+                if !viewModel.recommendations.isEmpty && !viewModel.hasReviewedAllCards {
                     actionButtons
                         .padding(.bottom, 20)
                 }
@@ -123,7 +125,9 @@ struct RecommendationView: View {
                         viewModel.advanceCard()
                     },
                     onSwipeRight: {
-                        selectedFood = food
+                        feedbackVM.toggleFeedback(foodId: food.id, isLiked: true, feedbacks: feedbacks)
+                        feedbackVM.savePendingFeedbacks(to: modelContext, existing: feedbacks)
+                        viewModel.selectFood(food)
                         viewModel.advanceCard()
                     },
                     onTap: {
@@ -161,7 +165,7 @@ struct RecommendationView: View {
                 if let food = viewModel.currentCard {
                     feedbackVM.toggleFeedback(foodId: food.id, isLiked: true, feedbacks: feedbacks)
                     feedbackVM.savePendingFeedbacks(to: modelContext, existing: feedbacks)
-                    selectedFood = food
+                    viewModel.selectFood(food)
                     viewModel.advanceCard()
                 }
             } label: {
@@ -173,6 +177,77 @@ struct RecommendationView: View {
                     .clipShape(Circle())
                     .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
             }
+        }
+    }
+
+    // MARK: - Results List
+
+    private var resultsList: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("오늘의 추천 결과")
+                    .font(.title2.bold())
+                    .foregroundStyle(AppDesign.navy)
+                    .padding(.top, 20)
+
+                if viewModel.selectedFoods.isEmpty {
+                    VStack(spacing: 12) {
+                        Image(systemName: "hand.thumbsdown")
+                            .font(.system(size: 40))
+                            .foregroundStyle(AppDesign.subtitleGray)
+                        Text("선택한 메뉴가 없어요")
+                            .font(.headline)
+                            .foregroundStyle(AppDesign.subtitleGray)
+                    }
+                    .padding(.top, 40)
+                } else {
+                    VStack(spacing: 12) {
+                        ForEach(viewModel.selectedFoods) { food in
+                            Button {
+                                selectedFood = food
+                            } label: {
+                                HStack(spacing: 16) {
+                                    Text(food.category.emoji)
+                                        .font(.system(size: 32))
+
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(food.name)
+                                            .font(.headline)
+                                            .foregroundStyle(AppDesign.navy)
+                                        Text(food.category.displayName)
+                                            .font(.caption)
+                                            .foregroundStyle(AppDesign.subtitleGray)
+                                    }
+
+                                    Spacer()
+
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundStyle(AppDesign.subtitleGray)
+                                }
+                                .padding(16)
+                                .background(AppDesign.cardWhite)
+                                .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
+                                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
+                            }
+                        }
+                    }
+                }
+
+                Button {
+                    viewModel.refresh(profile: profile, logs: logs, feedbacks: feedbacks)
+                } label: {
+                    Text("다시 추천받기")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                        .background(AppDesign.navy)
+                        .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
+                }
+                .padding(.top, 8)
+            }
+            .padding(.horizontal, AppDesign.horizontalPadding)
         }
     }
 
@@ -239,38 +314,37 @@ struct SwipeableCard: View {
     }
 
     private var cardContent: some View {
-        Button(action: onTap) {
-            VStack(spacing: 0) {
-                // Top area with branding + image
-                ZStack {
-                    VStack(spacing: 12) {
-                        Text("Plouf")
-                            .font(.system(size: 28, weight: .bold, design: .serif))
+        VStack(spacing: 0) {
+            // Top area with branding + image
+            ZStack {
+                VStack(spacing: 12) {
+                    Text("Plouf")
+                        .font(.system(size: 28, weight: .bold, design: .serif))
 
-                        // Food image placeholder
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.white.opacity(0.9))
-                            .frame(width: 140, height: 120)
-                            .overlay(
-                                Text(food.category.emoji)
-                                    .font(.system(size: 56))
-                            )
+                    // Food image placeholder
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.white.opacity(0.9))
+                        .frame(width: 140, height: 120)
+                        .overlay(
+                            Text(food.category.emoji)
+                                .font(.system(size: 56))
+                        )
 
-                        Spacer().frame(height: 8)
+                    Spacer().frame(height: 8)
 
-                        Text("[ \(food.name) ]")
-                            .font(.title3.bold())
-                    }
-                    .padding(.vertical, 32)
+                    Text("[ \(food.name) ]")
+                        .font(.title3.bold())
                 }
-                .frame(maxWidth: .infinity)
-                .foregroundStyle(AppDesign.navy)
+                .padding(.vertical, 32)
             }
-            .background(AppDesign.cardWhite)
-            .clipShape(RoundedRectangle(cornerRadius: AppDesign.cardCornerRadius))
-            .shadow(color: .black.opacity(0.06), radius: 12, y: 4)
+            .frame(maxWidth: .infinity)
+            .foregroundStyle(AppDesign.navy)
         }
-        .buttonStyle(.plain)
+        .background(AppDesign.cardWhite)
+        .clipShape(RoundedRectangle(cornerRadius: AppDesign.cardCornerRadius))
+        .shadow(color: .black.opacity(0.06), radius: 12, y: 4)
+        .contentShape(RoundedRectangle(cornerRadius: AppDesign.cardCornerRadius))
+        .onTapGesture(perform: onTap)
     }
 
     private var dragGesture: some Gesture {

@@ -15,6 +15,7 @@ final class RecommendationViewModel {
     var recommendations: [FoodItem] = []
     var currentMealType: MealType = .lunch
     var currentCardIndex: Int = 0
+    var selectedFoods: [FoodItem] = []
 
     private let engine = RecommendationEngine()
     private var foodDataService: FoodDataService?
@@ -24,9 +25,19 @@ final class RecommendationViewModel {
         return recommendations[currentCardIndex]
     }
 
+    var hasReviewedAllCards: Bool {
+        currentCardIndex >= recommendations.count && !recommendations.isEmpty
+    }
+
     func advanceCard() {
-        if currentCardIndex < recommendations.count - 1 {
+        if currentCardIndex < recommendations.count {
             currentCardIndex += 1
+        }
+    }
+
+    func selectFood(_ food: FoodItem) {
+        if !selectedFoods.contains(where: { $0.id == food.id }) {
+            selectedFoods.append(food)
         }
     }
 
@@ -39,6 +50,7 @@ final class RecommendationViewModel {
     func loadRecommendations(profile: UserProfile?, logs: [MealLog], feedbacks: [FeedbackRecord]) {
         currentMealType = MealType.current()
         currentCardIndex = 0
+        selectedFoods = []
 
         guard let profile else {
             recommendations = []
