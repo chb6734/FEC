@@ -1,6 +1,6 @@
 //
 //  RecommendationView.swift
-//  eunbin
+//  FEC
 //
 //  Created by Maya Designer & Dohyun iOS Engineer
 //
@@ -17,6 +17,7 @@ struct RecommendationView: View {
     @State private var feedbackVM = FeedbackViewModel()
     @State private var selectedFood: FoodItem?
     @State private var showManualLogging = false
+    @State private var hasLoaded = false
 
     private var profile: UserProfile? { profiles.first }
 
@@ -54,7 +55,6 @@ struct RecommendationView: View {
             .sheet(item: $selectedFood) { food in
                 MealLoggingView(food: food) {
                     selectedFood = nil
-                    viewModel.refresh(profile: profile, logs: logs, feedbacks: feedbacks)
                 }
             }
             .sheet(isPresented: $showManualLogging) {
@@ -65,7 +65,10 @@ struct RecommendationView: View {
             }
             .onAppear {
                 viewModel.configure(modelContext: modelContext)
-                viewModel.loadRecommendations(profile: profile, logs: logs, feedbacks: feedbacks)
+                if !hasLoaded {
+                    viewModel.loadRecommendations(profile: profile, logs: logs, feedbacks: feedbacks)
+                    hasLoaded = true
+                }
             }
             .toolbar(.hidden, for: .navigationBar)
         }
@@ -75,7 +78,7 @@ struct RecommendationView: View {
 
     private var topBar: some View {
         HStack {
-            Text("Plouf")
+            Text("FEC")
                 .font(.system(size: 24, weight: .bold, design: .serif))
                 .foregroundStyle(AppDesign.navy)
 
@@ -96,18 +99,46 @@ struct RecommendationView: View {
     // MARK: - Meal Time Badge
 
     private var mealTimeBadge: some View {
-        HStack(spacing: 6) {
-            Image(systemName: "clock")
-                .font(.caption)
-            Text("\(viewModel.currentMealType.displayName) Recommendation")
-                .font(.subheadline.weight(.medium))
+        let autoType = MealType.current()
+        let isSnack = viewModel.currentMealType == .snack
+
+        return HStack(spacing: 8) {
+            // 자동 감지 식사 타입 탭
+            Button {
+                viewModel.switchMealType(autoType, profile: profile, logs: logs, feedbacks: feedbacks)
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: autoType.systemImage)
+                        .font(.caption)
+                    Text("\(autoType.displayName) 추천")
+                        .font(.subheadline.weight(.medium))
+                }
+                .foregroundStyle(!isSnack ? .white : AppDesign.navy)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(!isSnack ? AppDesign.navy : AppDesign.cardWhite)
+                .clipShape(Capsule())
+                .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
+            }
+
+            // 간식 탭
+            Button {
+                viewModel.switchMealType(.snack, profile: profile, logs: logs, feedbacks: feedbacks)
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: MealType.snack.systemImage)
+                        .font(.caption)
+                    Text("간식")
+                        .font(.subheadline.weight(.medium))
+                }
+                .foregroundStyle(isSnack ? .white : AppDesign.navy)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(isSnack ? AppDesign.navy : AppDesign.cardWhite)
+                .clipShape(Capsule())
+                .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
+            }
         }
-        .foregroundStyle(AppDesign.navy)
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
-        .background(AppDesign.cardWhite)
-        .clipShape(Capsule())
-        .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
     }
 
     // MARK: - Card Stack
@@ -119,6 +150,7 @@ struct RecommendationView: View {
                     food: food,
                     isTopCard: index == viewModel.currentCardIndex,
                     cardOffset: index - viewModel.currentCardIndex,
+                    cardIndex: index,
                     onSwipeLeft: {
                         feedbackVM.toggleFeedback(foodId: food.id, isLiked: false, feedbacks: feedbacks)
                         feedbackVM.savePendingFeedbacks(to: modelContext, existing: feedbacks)
@@ -136,7 +168,7 @@ struct RecommendationView: View {
                 )
             }
         }
-        .padding(.horizontal, 32)
+        .padding(.horizontal, 52)
     }
 
     // MARK: - Action Buttons
@@ -185,51 +217,43 @@ struct RecommendationView: View {
     private var resultsList: some View {
         ScrollView {
             VStack(spacing: 20) {
-                Text("오늘의 추천 결과")
+                Text("오늘의 추천 메뉴")
                     .font(.title2.bold())
                     .foregroundStyle(AppDesign.navy)
                     .padding(.top, 20)
 
-                if viewModel.selectedFoods.isEmpty {
-                    VStack(spacing: 12) {
-                        Image(systemName: "hand.thumbsdown")
-                            .font(.system(size: 40))
-                            .foregroundStyle(AppDesign.subtitleGray)
-                        Text("선택한 메뉴가 없어요")
-                            .font(.headline)
-                            .foregroundStyle(AppDesign.subtitleGray)
-                    }
-                    .padding(.top, 40)
-                } else {
-                    VStack(spacing: 12) {
-                        ForEach(viewModel.selectedFoods) { food in
-                            Button {
-                                selectedFood = food
-                            } label: {
-                                HStack(spacing: 16) {
-                                    Text(food.category.emoji)
-                                        .font(.system(size: 32))
+                Text("마음에 드는 메뉴를 선택해보세요")
+                    .font(.subheadline)
+                    .foregroundStyle(AppDesign.subtitleGray)
 
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text(food.name)
-                                            .font(.headline)
-                                            .foregroundStyle(AppDesign.navy)
-                                        Text(food.category.displayName)
-                                            .font(.caption)
-                                            .foregroundStyle(AppDesign.subtitleGray)
-                                    }
+                VStack(spacing: 12) {
+                    ForEach(viewModel.recommendations) { food in
+                        Button {
+                            selectedFood = food
+                        } label: {
+                            HStack(spacing: 16) {
+                                Text(food.category.emoji)
+                                    .font(.system(size: 32))
 
-                                    Spacer()
-
-                                    Image(systemName: "chevron.right")
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(food.name)
+                                        .font(.headline)
+                                        .foregroundStyle(AppDesign.navy)
+                                    Text(food.category.displayName)
                                         .font(.caption)
                                         .foregroundStyle(AppDesign.subtitleGray)
                                 }
-                                .padding(16)
-                                .background(AppDesign.cardWhite)
-                                .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
-                                .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
+
+                                Spacer()
+
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundStyle(AppDesign.subtitleGray)
                             }
+                            .padding(16)
+                            .background(AppDesign.cardWhite)
+                            .clipShape(RoundedRectangle(cornerRadius: AppDesign.cornerRadius))
+                            .shadow(color: .black.opacity(0.04), radius: 4, y: 2)
                         }
                     }
                 }
@@ -287,6 +311,7 @@ struct SwipeableCard: View {
     let food: FoodItem
     let isTopCard: Bool
     let cardOffset: Int
+    let cardIndex: Int
     let onSwipeLeft: () -> Void
     let onSwipeRight: () -> Void
     let onTap: () -> Void
@@ -296,6 +321,15 @@ struct SwipeableCard: View {
 
     private var rotation: Double {
         Double(dragOffset.width) / 20.0
+    }
+
+    // 짝수 인덱스는 blue, 홀수 인덱스는 white, 없으면 반대쪽 URL로 폴백
+    private var selectedImageURL: URL? {
+        let preferBlue = cardIndex % 2 == 0
+        let urlString = preferBlue
+            ? (food.imageUrlBlue ?? food.imageUrlWhite)
+            : (food.imageUrlWhite ?? food.imageUrlBlue)
+        return urlString.flatMap { URL(string: $0) }
     }
 
     var body: some View {
@@ -314,33 +348,46 @@ struct SwipeableCard: View {
     }
 
     private var cardContent: some View {
-        VStack(spacing: 0) {
-            // Top area with branding + image
-            ZStack {
-                VStack(spacing: 12) {
-                    Text("Plouf")
-                        .font(.system(size: 28, weight: .bold, design: .serif))
-
-                    // Food image placeholder
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.white.opacity(0.9))
-                        .frame(width: 140, height: 120)
-                        .overlay(
-                            Text(food.category.emoji)
-                                .font(.system(size: 56))
-                        )
-
-                    Spacer().frame(height: 8)
-
-                    Text("[ \(food.name) ]")
-                        .font(.title3.bold())
+        Group {
+            if let url = selectedImageURL {
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    case .failure:
+                        Color(UIColor.systemGray5)
+                            .overlay(
+                                Text(food.category.emoji)
+                                    .font(.system(size: 72))
+                            )
+                    default:
+                        Color(UIColor.systemGray6)
+                            .overlay(ProgressView())
+                    }
                 }
-                .padding(.vertical, 32)
+            } else {
+                Color(UIColor.systemGray5)
+                    .overlay(
+                        Text(food.category.emoji)
+                            .font(.system(size: 72))
+                    )
             }
-            .frame(maxWidth: .infinity)
-            .foregroundStyle(AppDesign.navy)
         }
-        .background(AppDesign.cardWhite)
+        .frame(maxWidth: .infinity)
+        .aspectRatio(3/4, contentMode: .fit)
+        .clipped()
+        .overlay(alignment: .top) {
+            Text(food.category.displayName)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 7)
+                .background(food.category.themeColor)
+                .clipShape(Capsule())
+                .padding(.top, 16)
+        }
         .clipShape(RoundedRectangle(cornerRadius: AppDesign.cardCornerRadius))
         .shadow(color: .black.opacity(0.06), radius: 12, y: 4)
         .contentShape(RoundedRectangle(cornerRadius: AppDesign.cardCornerRadius))
@@ -403,6 +450,7 @@ struct SwipeableCard: View {
         ),
         isTopCard: true,
         cardOffset: 0,
+        cardIndex: 0,
         onSwipeLeft: { print("Swiped left") },
         onSwipeRight: { print("Swiped right") },
         onTap: { print("Tapped") }
