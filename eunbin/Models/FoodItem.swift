@@ -1,6 +1,6 @@
 //
 //  FoodItem.swift
-//  eunbin
+//  FEC
 //
 //  Created by Dohyun iOS Engineer
 //
@@ -16,10 +16,13 @@ struct FoodItem: Identifiable, Codable, Equatable {
     let tags: [String]
     let baseScore: Double
     let imagePath: String?
+    let imageUrlWhite: String?
+    let imageUrlBlue: String?
 
     init(id: String, name: String, category: FoodCategory,
          mealTypes: [MealType], restrictions: [DietaryRestriction],
-         tags: [String], baseScore: Double, imagePath: String? = nil) {
+         tags: [String], baseScore: Double, imagePath: String? = nil,
+         imageUrlWhite: String? = nil, imageUrlBlue: String? = nil) {
         self.id = id
         self.name = name
         self.category = category
@@ -28,5 +31,7 @@ struct FoodItem: Identifiable, Codable, Equatable {
         self.tags = tags
         self.baseScore = baseScore
         self.imagePath = imagePath
+        self.imageUrlWhite = imageUrlWhite
+        self.imageUrlBlue = imageUrlBlue
     }
 }

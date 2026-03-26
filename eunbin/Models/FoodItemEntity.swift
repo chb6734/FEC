@@ -18,10 +18,13 @@ final class FoodItemEntity {
     var tags: [String]
     var baseScore: Double
     var imagePath: String?
+    var imageUrlWhite: String?
+    var imageUrlBlue: String?
 
     init(foodId: String, name: String, category: FoodCategory,
          mealTypes: [MealType], restrictions: [DietaryRestriction],
-         tags: [String], baseScore: Double, imagePath: String? = nil) {
+         tags: [String], baseScore: Double, imagePath: String? = nil,
+         imageUrlWhite: String? = nil, imageUrlBlue: String? = nil) {
         self.foodId = foodId
         self.name = name
         self.categoryRaw = category.rawValue
@@ -30,6 +33,8 @@ final class FoodItemEntity {
         self.tags = tags
         self.baseScore = baseScore
         self.imagePath = imagePath
+        self.imageUrlWhite = imageUrlWhite
+        self.imageUrlBlue = imageUrlBlue
     }
 
     var category: FoodCategory {
@@ -53,7 +58,9 @@ final class FoodItemEntity {
             restrictions: restrictions,
             tags: tags,
             baseScore: baseScore,
-            imagePath: imagePath
+            imagePath: imagePath,
+            imageUrlWhite: imageUrlWhite,
+            imageUrlBlue: imageUrlBlue
         )
     }
 }
