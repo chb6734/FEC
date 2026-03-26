@@ -1,6 +1,6 @@
 //
 //  RecommendationEngine.swift
-//  eunbin
+//  FEC
 //
 //  Created by Dohyun iOS Engineer
 //
@@ -25,7 +25,7 @@ struct FeedbackEntry {
 }
 
 final class RecommendationEngine {
-    private let maxResults = 3
+    private let maxResults = 5
     private let recentAvoidanceDays = 3
 
     func recommend(
@@ -37,7 +37,16 @@ final class RecommendationEngine {
     ) -> [FoodItem] {
 
         // 1. Filter by meal type
-        var candidates = allFoods.filter { $0.mealTypes.contains(mealType) }
+        // 야식: dinner 음식을 사용 / 간식: 전체 음식에서 추천
+        var candidates: [FoodItem]
+        switch mealType {
+        case .snack:
+            candidates = allFoods
+        case .lateNight:
+            candidates = allFoods.filter { $0.mealTypes.contains(.lateNight) }
+        default:
+            candidates = allFoods.filter { $0.mealTypes.contains(mealType) }
+        }
 
         // 2. Filter by dietary restrictions
         let hasRestriction = !profile.restrictions.contains(.none) && !profile.restrictions.isEmpty
