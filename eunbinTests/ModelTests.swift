@@ -14,11 +14,21 @@ import Foundation
 struct FoodCategoryTests {
     @Test func allCasesExist() {
         let allCases = FoodCategory.allCases
-        #expect(allCases.count == 8)
+        #expect(allCases.count == 18)
         #expect(allCases.contains(.korean))
         #expect(allCases.contains(.chinese))
         #expect(allCases.contains(.japanese))
-        #expect(allCases.contains(.western))
+        #expect(allCases.contains(.italian))
+        #expect(allCases.contains(.american))
+        #expect(allCases.contains(.french))
+        #expect(allCases.contains(.southeastAsian))
+        #expect(allCases.contains(.mexican))
+        #expect(allCases.contains(.middleEastern))
+        #expect(allCases.contains(.salad))
+        #expect(allCases.contains(.noodle))
+        #expect(allCases.contains(.fastfood))
+        #expect(allCases.contains(.seafood))
+        #expect(allCases.contains(.brunch))
         #expect(allCases.contains(.drinks))
         #expect(allCases.contains(.dessert))
         #expect(allCases.contains(.snack))
@@ -26,18 +36,19 @@ struct FoodCategoryTests {
     }
 
     @Test func displayNames() {
-        #expect(FoodCategory.korean.displayName == "Korean")
-        #expect(FoodCategory.chinese.displayName == "Chinese")
-        #expect(FoodCategory.japanese.displayName == "Japanese")
-        #expect(FoodCategory.western.displayName == "Western")
-        #expect(FoodCategory.drinks.displayName == "Drinks")
-        #expect(FoodCategory.dessert.displayName == "Dessert")
-        #expect(FoodCategory.other.displayName == "Other")
+        #expect(FoodCategory.korean.displayName == "한식")
+        #expect(FoodCategory.chinese.displayName == "중식")
+        #expect(FoodCategory.japanese.displayName == "일식")
+        #expect(FoodCategory.italian.displayName == "이탈리안")
+        #expect(FoodCategory.middleEastern.displayName == "중동")
+        #expect(FoodCategory.drinks.displayName == "음료")
+        #expect(FoodCategory.dessert.displayName == "디저트")
+        #expect(FoodCategory.other.displayName == "기타")
     }
 
     @Test func onboardingCasesExcludesSnack() {
         let cases = FoodCategory.onboardingCases
-        #expect(cases.count == 7)
+        #expect(cases.count == 17)
         #expect(!cases.contains(.snack))
     }
 }
@@ -244,7 +255,7 @@ struct FoodDatabaseTests {
         #expect(categories.contains(.korean))
         #expect(categories.contains(.chinese))
         #expect(categories.contains(.japanese))
-        #expect(categories.contains(.western))
+        #expect(categories.contains(.italian))
         #expect(categories.contains(.snack))
     }
 

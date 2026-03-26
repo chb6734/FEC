@@ -1,6 +1,6 @@
 //
 //  FoodDataService.swift
-//  eunbin
+//  FEC
 //
 //  Created by Dohyun iOS Engineer
 //

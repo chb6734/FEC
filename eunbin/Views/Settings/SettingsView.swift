@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  eunbin
+//  FEC
 //
 //  Created by Maya Designer & Dohyun iOS Engineer
 //

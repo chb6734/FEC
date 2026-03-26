@@ -101,7 +101,7 @@ struct FoodDataServiceTests {
         #expect(categories.contains(.korean))
         #expect(categories.contains(.chinese))
         #expect(categories.contains(.japanese))
-        #expect(categories.contains(.western))
+        #expect(categories.contains(.italian))
         #expect(categories.contains(.snack))
     }
 

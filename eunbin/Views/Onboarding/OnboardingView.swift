@@ -1,6 +1,6 @@
 //
 //  OnboardingView.swift
-//  eunbin
+//  FEC
 //
 //  Created by Maya Designer & Dohyun iOS Engineer
 //
@@ -16,7 +16,7 @@ struct OnboardingView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Brand
-            Text("Plouf")
+            Text("FEC")
                 .font(.system(size: 32, weight: .bold, design: .serif))
                 .foregroundStyle(AppDesign.navy)
                 .padding(.top, 40)
