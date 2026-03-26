@@ -1,13 +1,13 @@
 //
-//  eunbinUITests.swift
-//  eunbinUITests
+//  FECUITests.swift
+//  FECUITests
 //
 //  Created by 차현빈 on 3/4/26.
 //
 
 import XCTest
 
-final class eunbinUITests: XCTestCase {
+final class FECUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
