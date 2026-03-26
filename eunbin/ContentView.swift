@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  eunbin
+//  FEC
 //
 //  Created by 차현빈 on 3/4/26.
 //
@@ -11,9 +11,10 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var profiles: [UserProfile]
+    @AppStorage("hasCompletedOnboarding") private var onboardingDone = false
 
     private var hasCompletedOnboarding: Bool {
-        profiles.first?.hasCompletedOnboarding == true
+        onboardingDone || profiles.first?.hasCompletedOnboarding == true
     }
 
     var body: some View {
@@ -21,7 +22,7 @@ struct ContentView: View {
             RecommendationView()
         } else {
             OnboardingView {
-                // Profile is saved inside OnboardingView
+                onboardingDone = true
             }
         }
     }
