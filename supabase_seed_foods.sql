@@ -1,0 +1,121 @@
+-- ===========================================
+-- 야식 (lateNight) / 간식 (snack) 음식 데이터
+-- Supabase Dashboard > SQL Editor 에서 실행하세요
+-- ON CONFLICT: 이미 존재하는 ID는 meal_types만 병합됩니다
+-- ===========================================
+
+-- ───────────────────────────────────────────
+-- 야식 (lateNight) 50개
+-- ───────────────────────────────────────────
+
+INSERT INTO foods (id, name, category, meal_types, restrictions, tags, base_score) VALUES
+  ('yangnyeom_chicken',  '양념치킨',    'fastfood', ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['치킨','야식','매운맛'],   1.2),
+  ('ganjang_chicken',    '간장치킨',    'fastfood', ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['치킨','야식','달달'],     1.2),
+  ('pizza',              '피자',        'american', ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['치즈','야식'],            1.1),
+  ('jokbal',             '족발',        'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주'],            1.2),
+  ('bossam',             '보쌈',        'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','보쌈'],     1.1),
+  ('ramen_latenight',    '라면',        'noodle',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','간단','뜨끈'],     1.3),
+  ('gopchang',           '곱창',        'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','곱창'],     1.0),
+  ('samgyeopsal',        '삼겹살',      'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['고기','야식','안주'],     1.2),
+  ('malatang',           '마라탕',      'chinese',  ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['마라','야식','매운맛'],   1.1),
+  ('jjajangmyeon',       '짜장면',      'chinese',  ARRAY['lateNight','lunch'],   ARRAY[]::text[], ARRAY['중식','야식','면'],       1.2),
+  ('jjamppong',          '짬뽕',        'chinese',  ARRAY['lateNight','lunch'],   ARRAY[]::text[], ARRAY['중식','야식','매운맛'],   1.2),
+  ('tangsuyuk',          '탕수육',      'chinese',  ARRAY['lateNight','lunch'],   ARRAY[]::text[], ARRAY['중식','야식','안주'],     1.1),
+  ('dakbal',             '닭발',        'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','매운맛'],   0.9),
+  ('gamjatang',          '감자탕',      'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','뜨끈','해장'],     1.0),
+  ('haejangguk',         '해장국',      'korean',   ARRAY['lateNight','breakfast'],ARRAY[]::text[], ARRAY['해장','뜨끈','국밥'],    1.1),
+  ('sundubu_jjigae',     '순두부찌개',  'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['찌개','야식','뜨끈'],     1.1),
+  ('budae_jjigae',       '부대찌개',    'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['찌개','야식','얼큰'],     1.1),
+  ('makchang',           '막창',        'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','구이'],     1.0),
+  ('ojingeo_bokkeum',    '오징어볶음',  'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','매운맛','해물'],   1.0),
+  ('jeyuk_bokkeum',      '제육볶음',    'korean',   ARRAY['lateNight','lunch','dinner'], ARRAY[]::text[], ARRAY['야식','매운맛','돼지'], 1.1),
+  ('dakbokkeum_tang',    '닭볶음탕',    'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','매운맛','닭'],     1.1),
+  ('jjukumi_bokkeum',    '쭈꾸미볶음',  'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','매운맛','해물'],   1.0),
+  ('nakji_bokkeum',      '낙지볶음',    'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','매운맛','해물'],   1.0),
+  ('deunggalbi',         '등갈비',      'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','고기'],     1.1),
+  ('galmaegi_sal',       '갈매기살',    'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','구이'],     1.1),
+  ('hangjeong_sal',      '항정살',      'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','구이'],     1.1),
+  ('haemul_pajeon',      '해물파전',    'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','전'],       1.1),
+  ('kimchi_jeon',        '김치전',      'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','전'],       1.1),
+  ('dongtae_jjigae',     '동태찌개',    'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','뜨끈','생선'],     1.0),
+  ('altang',             '알탕',        'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','얼큰','해물'],     1.0),
+  ('galbi_jjim',         '갈비찜',      'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','안주','고기'],     1.1),
+  ('jjimdak',            '찜닭',        'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','달달','닭'],       1.1),
+  ('buldak',             '불닭',        'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','매운맛','닭'],     1.0),
+  ('dak_galbi',          '닭갈비',      'korean',   ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','매운맛','닭'],     1.1),
+  ('naengmyeon',         '냉면',        'noodle',   ARRAY['lateNight','lunch','dinner'], ARRAY[]::text[], ARRAY['면','야식','시원'], 1.1),
+  ('makguksu',           '막국수',      'noodle',   ARRAY['lateNight','lunch'],   ARRAY[]::text[], ARRAY['면','야식','메밀'],       1.0),
+  ('yangkkochi',         '양꼬치',      'chinese',  ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','구이'],     1.1),
+  ('marashangguo',       '마라샹궈',    'chinese',  ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['마라','야식','매운맛'],   1.0),
+  ('huoguo',             '훠궈',        'chinese',  ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','중식','안주'],     1.0),
+  ('shabu_shabu',        '샤브샤브',    'japanese', ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','건강','담백'],     1.1),
+  ('odeng_tang',         '오뎅탕',      'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','뜨끈','안주'],     1.0),
+  ('saeu_gui',           '새우구이',    'seafood',  ARRAY['lateNight','dinner'],  ARRAY[]::text[], ARRAY['야식','해물','안주'],     1.1),
+  ('kkomi_gui',          '꼼장어구이',  'seafood',  ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','해물'],     0.9),
+  ('samhap',             '삼합',        'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','조합'],     1.0),
+  ('daechang_gui',       '대창구이',    'korean',   ARRAY['lateNight'],           ARRAY[]::text[], ARRAY['야식','안주','구이'],     1.0),
+  ('galbi_tang',         '갈비탕',      'korean',   ARRAY['lateNight','lunch','dinner'], ARRAY[]::text[], ARRAY['야식','뜨끈','고기'], 1.1),
+  ('seolleongtang',      '설렁탕',      'korean',   ARRAY['lateNight','lunch'],   ARRAY[]::text[], ARRAY['야식','뜨끈','담백'],     1.1),
+  ('kimchi_jjigae',      '김치찌개',    'korean',   ARRAY['lateNight','lunch','dinner'], ARRAY[]::text[], ARRAY['야식','얼큰','김치'], 1.3),
+  ('dwaejji_gukbap',     '돼지국밥',    'korean',   ARRAY['lateNight','breakfast','lunch'], ARRAY[]::text[], ARRAY['야식','뜨끈','국밥'], 1.1),
+  ('yukgaejang',         '육개장',      'korean',   ARRAY['lateNight','lunch','dinner'], ARRAY[]::text[], ARRAY['야식','얼큰','뜨끈'], 1.1)
+ON CONFLICT (id) DO UPDATE
+  SET meal_types = ARRAY(SELECT DISTINCT unnest(foods.meal_types || EXCLUDED.meal_types));
+
+-- ───────────────────────────────────────────
+-- 간식 (snack) 50개
+-- ───────────────────────────────────────────
+
+INSERT INTO foods (id, name, category, meal_types, restrictions, tags, base_score) VALUES
+  ('bungeoppang',       '붕어빵',      'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','분식'],    1.2),
+  ('hotteok',           '호떡',        'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','분식'],    1.2),
+  ('korean_hotdog',     '핫도그',      'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','분식','치즈'],    1.1),
+  ('gyeran_ppang',      '계란빵',      'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','분식'],    1.1),
+  ('gun_goguma',        '군고구마',    'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','건강','달달'],    1.1),
+  ('gun_bam',           '군밤',        'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','건강','고소'],    1.0),
+  ('waffle',            '와플',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','디저트'],  1.2),
+  ('crepe',             '크레페',      'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','프렌치'],  1.1),
+  ('donut',             '도넛',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','빵'],      1.1),
+  ('macaron',           '마카롱',      'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','프렌치'],  1.1),
+  ('cake',              '케이크',      'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','디저트'],  1.1),
+  ('ice_cream',         '아이스크림',  'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','시원'],    1.3),
+  ('bingsu',            '빙수',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','시원'],    1.2),
+  ('yogurt',            '요거트',      'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','건강','달달'],    1.1),
+  ('pudding',           '푸딩',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','부드러운'], 1.0),
+  ('cookie',            '쿠키',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','고소'],    1.1),
+  ('muffin',            '머핀',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','빵'],      1.0),
+  ('scone',             '스콘',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','고소','빵'],      1.0),
+  ('castella',          '카스텔라',    'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','부드러운'], 1.1),
+  ('yakgwa',            '약과',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','한식'],    1.0),
+  ('gangjeong',         '강정',        'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','한식'],    1.0),
+  ('injeolmi',          '인절미',      'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','고소','떡'],      1.1),
+  ('popcorn',           '팝콘',        'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','고소','영화'],    1.1),
+  ('french_fries',      '감자튀김',    'fastfood', ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','짭짤','패스트푸드'], 1.2),
+  ('cheese_ball',       '치즈볼',      'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','치즈','바삭'],    1.1),
+  ('takoyaki',          '타코야끼',    'japanese', ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','일식','문어'],    1.1),
+  ('tteokbokki',        '떡볶이',      'snack',    ARRAY['snack','lateNight'],  ARRAY[]::text[], ARRAY['간식','매운맛','분식'],  1.3),
+  ('eomuk',             '어묵',        'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','분식','뜨끈'],    1.1),
+  ('sundae_korean',     '순대',        'snack',    ARRAY['snack','lateNight'],  ARRAY[]::text[], ARRAY['간식','분식','야식'],    1.1),
+  ('cup_ramen',         '컵라면',      'noodle',   ARRAY['snack','lateNight'],  ARRAY[]::text[], ARRAY['간식','간단','야식'],    1.0),
+  ('choco_pie',         '초코파이',    'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','초콜릿'],  1.0),
+  ('shrimp_cracker',    '새우깡',      'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','짭짤','과자'],    1.0),
+  ('pizza_bread',       '피자빵',      'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','치즈','빵'],      1.0),
+  ('cafe_latte',        '카페라떼',    'drinks',   ARRAY['snack','breakfast'],  ARRAY[]::text[], ARRAY['간식','커피','음료'],    1.1),
+  ('bubble_tea',        '버블티',      'drinks',   ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','음료'],    1.2),
+  ('smoothie',          '스무디',      'drinks',   ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','건강','음료'],    1.1),
+  ('hot_chocolate',     '핫초코',      'drinks',   ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','음료'],    1.1),
+  ('milk_tea',          '밀크티',      'drinks',   ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','음료'],    1.1),
+  ('fruit_ade',         '에이드',      'drinks',   ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','시원','음료'],    1.1),
+  ('sandwich',          '샌드위치',    'brunch',   ARRAY['snack','breakfast','lunch'], ARRAY[]::text[], ARRAY['간식','간단','빵'], 1.1),
+  ('bagel',             '베이글',      'brunch',   ARRAY['snack','breakfast'],  ARRAY[]::text[], ARRAY['간식','고소','빵'],      1.0),
+  ('croissant',         '크로아상',    'brunch',   ARRAY['snack','breakfast'],  ARRAY[]::text[], ARRAY['간식','달달','빵'],      1.1),
+  ('brownie',           '브라우니',    'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','초콜릿'],  1.1),
+  ('cheesecake',        '치즈케이크',  'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','치즈'],    1.2),
+  ('tiramisu',          '티라미수',    'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','이탈리안'], 1.1),
+  ('eclair',            '에클레어',    'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','프렌치'],  1.0),
+  ('cotton_candy',      '솜사탕',      'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','분식'],    1.0),
+  ('churros',           '추로스',      'snack',    ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','달달','바삭'],    1.1),
+  ('tteok',             '떡',          'dessert',  ARRAY['snack'],              ARRAY[]::text[], ARRAY['간식','한식','달달'],    1.0),
+  ('granola_bar',       '그래놀라바',  'brunch',   ARRAY['snack','breakfast'],  ARRAY[]::text[], ARRAY['간식','건강','고소'],    1.0)
+ON CONFLICT (id) DO UPDATE
+  SET meal_types = ARRAY(SELECT DISTINCT unnest(foods.meal_types || EXCLUDED.meal_types));
