@@ -45,6 +45,8 @@ final class OnboardingViewModel {
     var selectedBudget: BudgetRange?
     var dislikeText: String = ""
 
+    private let supabaseService = SupabaseService()
+
     var progress: Double {
         let total = Double(OnboardingStep.totalSteps)
         let current = Double(currentStep.rawValue + 1)
@@ -89,6 +91,7 @@ final class OnboardingViewModel {
     }
 
     func saveProfile(to modelContext: ModelContext) {
+        // 로컬 SwiftData 저장
         let profile = UserProfile()
         profile.mealPattern = Array(selectedMealPatterns)
         profile.restrictions = Array(selectedRestrictions)
@@ -97,5 +100,28 @@ final class OnboardingViewModel {
         profile.dislikes = parsedDislikes
         profile.hasCompletedOnboarding = true
         modelContext.insert(profile)
+
+        // Supabase에 프로필 동기화
+        Task {
+            await syncProfileToSupabase()
+        }
+    }
+
+    private func syncProfileToSupabase() async {
+        guard let userId = await supabaseService.currentUserId() else { return }
+        let profile = SupabaseProfile(
+            id: userId,
+            mealPatterns: selectedMealPatterns.map(\.rawValue),
+            restrictions: selectedRestrictions.map(\.rawValue),
+            preferredCategories: selectedCategories.map(\.rawValue),
+            dislikes: parsedDislikes,
+            budget: selectedBudget?.rawValue,
+            hasCompletedOnboarding: true
+        )
+        do {
+            try await supabaseService.updateProfile(profile)
+        } catch {
+            print("Failed to sync profile to Supabase: \(error)")
+        }
     }
 }

@@ -19,6 +19,7 @@ final class RecommendationViewModel {
 
     private let engine = RecommendationEngine()
     private var foodDataService: FoodDataService?
+    private let supabaseService = SupabaseService()
 
     var currentCard: FoodItem? {
         guard currentCardIndex < recommendations.count else { return nil }
@@ -31,6 +32,16 @@ final class RecommendationViewModel {
 
     func advanceCard() {
         if currentCardIndex < recommendations.count {
+            // 스킵한 카드를 selection_log에 기록
+            if let card = currentCard {
+                Task {
+                    try? await supabaseService.insertSelectionLog(
+                        foodId: card.id,
+                        mealType: currentMealType,
+                        isSelected: false
+                    )
+                }
+            }
             currentCardIndex += 1
         }
     }
@@ -38,6 +49,14 @@ final class RecommendationViewModel {
     func selectFood(_ food: FoodItem) {
         if !selectedFoods.contains(where: { $0.id == food.id }) {
             selectedFoods.append(food)
+            // 선택한 카드를 selection_log에 기록
+            Task {
+                try? await supabaseService.insertSelectionLog(
+                    foodId: food.id,
+                    mealType: currentMealType,
+                    isSelected: true
+                )
+            }
         }
     }
 
@@ -51,7 +70,17 @@ final class RecommendationViewModel {
         currentMealType = MealType.current()
         currentCardIndex = 0
         selectedFoods = []
+        reloadCards(profile: profile, logs: logs, feedbacks: feedbacks)
+    }
 
+    func switchMealType(_ type: MealType, profile: UserProfile?, logs: [MealLog], feedbacks: [FeedbackRecord]) {
+        currentMealType = type
+        currentCardIndex = 0
+        selectedFoods = []
+        reloadCards(profile: profile, logs: logs, feedbacks: feedbacks)
+    }
+
+    private func reloadCards(profile: UserProfile?, logs: [MealLog], feedbacks: [FeedbackRecord]) {
         guard let profile else {
             recommendations = []
             return
@@ -67,22 +96,36 @@ final class RecommendationViewModel {
         let recentLogs = logs.map { RecentLog(foodName: $0.foodName, date: $0.timestamp) }
         let feedbackEntries = feedbacks.map { FeedbackEntry(foodId: $0.foodId, isLiked: $0.isLiked) }
 
-        // Fetch foods from SwiftData, fallback to FoodDatabase
-        let allFoods: [FoodItem]
-        if let service = foodDataService,
-           let entities = try? service.fetchAllFoods() {
-            allFoods = entities.map { $0.toFoodItem() }
-        } else {
-            allFoods = FoodDatabase.allFoods
+        Task {
+            let allFoods = await fetchFoods()
+            recommendations = engine.recommend(
+                for: currentMealType,
+                profile: profileData,
+                recentLogs: recentLogs,
+                feedbacks: feedbackEntries,
+                allFoods: allFoods
+            )
+        }
+    }
+
+    private func fetchFoods() async -> [FoodItem] {
+        // Supabase 우선, 실패 시 로컬 폴백
+        do {
+            let supabaseFoods = try await supabaseService.fetchAllFoods()
+            if !supabaseFoods.isEmpty {
+                return supabaseFoods.map { $0.toFoodItem() }
+            }
+        } catch {
+            print("Supabase fetch failed, using local: \(error)")
         }
 
-        recommendations = engine.recommend(
-            for: currentMealType,
-            profile: profileData,
-            recentLogs: recentLogs,
-            feedbacks: feedbackEntries,
-            allFoods: allFoods
-        )
+        // 로컬 SwiftData 폴백
+        if let service = foodDataService,
+           let entities = try? service.fetchAllFoods() {
+            return entities.map { $0.toFoodItem() }
+        }
+
+        return FoodDatabase.allFoods
     }
 
     func refresh(profile: UserProfile?, logs: [MealLog], feedbacks: [FeedbackRecord]) {

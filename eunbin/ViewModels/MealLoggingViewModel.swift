@@ -18,6 +18,8 @@ final class MealLoggingViewModel {
     var isSaved: Bool = false
     let isFromRecommendation: Bool
 
+    private let supabaseService = SupabaseService()
+
     var canSave: Bool {
         !foodName.trimmingCharacters(in: .whitespaces).isEmpty
     }
@@ -35,13 +37,30 @@ final class MealLoggingViewModel {
 
     func save(to modelContext: ModelContext) {
         guard canSave else { return }
+        let trimmedName = foodName.trimmingCharacters(in: .whitespaces)
+        let noteValue = note.isEmpty ? nil : note
+
+        // 로컬 SwiftData 저장
         let log = MealLog(
-            foodName: foodName.trimmingCharacters(in: .whitespaces),
+            foodName: trimmedName,
             mealType: selectedMealType,
             timestamp: Date(),
-            note: note.isEmpty ? nil : note
+            note: noteValue
         )
         modelContext.insert(log)
         isSaved = true
+
+        // Supabase에 동기화
+        Task {
+            do {
+                try await supabaseService.insertMealLog(
+                    foodName: trimmedName,
+                    mealType: selectedMealType,
+                    note: noteValue
+                )
+            } catch {
+                print("Failed to sync meal log to Supabase: \(error)")
+            }
+        }
     }
 }

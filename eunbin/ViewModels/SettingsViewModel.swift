@@ -17,6 +17,8 @@ final class SettingsViewModel {
     var selectedCategories: Set<FoodCategory> = []
     var dislikeText: String = ""
 
+    private let supabaseService = SupabaseService()
+
     var canSave: Bool {
         !selectedMealPatterns.isEmpty &&
         !selectedRestrictions.isEmpty &&
@@ -46,9 +48,37 @@ final class SettingsViewModel {
     }
 
     func save(to profile: UserProfile) {
+        // 로컬 SwiftData 업데이트
         profile.mealPattern = Array(selectedMealPatterns)
         profile.restrictions = Array(selectedRestrictions)
         profile.preferredCategories = Array(selectedCategories)
         profile.dislikes = parsedDislikes
+
+        // Supabase에 동기화
+        Task {
+            await syncProfileToSupabase()
+        }
+    }
+
+    func signOut() async throws {
+        try await supabaseService.signOut()
+    }
+
+    private func syncProfileToSupabase() async {
+        guard let userId = await supabaseService.currentUserId() else { return }
+        let profile = SupabaseProfile(
+            id: userId,
+            mealPatterns: selectedMealPatterns.map(\.rawValue),
+            restrictions: selectedRestrictions.map(\.rawValue),
+            preferredCategories: selectedCategories.map(\.rawValue),
+            dislikes: parsedDislikes,
+            budget: nil,
+            hasCompletedOnboarding: true
+        )
+        do {
+            try await supabaseService.updateProfile(profile)
+        } catch {
+            print("Failed to sync settings to Supabase: \(error)")
+        }
     }
 }
